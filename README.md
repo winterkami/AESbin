@@ -1,3 +1,5 @@
 # COMP307-project
 
-test
+## Quick Start
+
+Navigate to index.html
