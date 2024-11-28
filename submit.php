@@ -26,6 +26,9 @@ try {
         "INSERT INTO user_content (content) VALUES (?)",
         [$content]
     );
+    // redirect to display the content
+    header("Location: display.php");
+    exit();
 } catch (Exception $e) {
     echo $e->getMessage();
 } finally {
