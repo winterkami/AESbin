@@ -16,18 +16,31 @@ try {
     $mysqli->select_db($dbname);
     $mysqli->query("
     CREATE TABLE IF NOT EXISTS user_content (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id VARCHAR(255) NOT NULL UNIQUE,
             content TEXT NOT NULL
-        )
+        );
     ");
-    // insert content
+
+    // get content
     $content = $_POST['content'];
+    // generate unique id that doesn't exist in the db
+    $id = null;
+    do {
+        $id = bin2hex(random_bytes(6));
+        $result = $mysqli->execute_query(
+            "SELECT COUNT(*) as count FROM user_content 
+            WHERE id = ?",
+            [$id]
+        );
+        $count = $result->fetch_assoc()["count"];
+    } while ($count > 0);
+    // insert content
     $mysqli->execute_query(
-        "INSERT INTO user_content (content) VALUES (?)",
-        [$content]
+        "INSERT INTO user_content (id, content) VALUES (?, ?)",
+        [$id, $content]
     );
-    // redirect to display the content
-    header("Location: display.php");
+    // redirect to unique page
+    header("Location: pastes/$id");
     exit();
 } catch (Exception $e) {
     echo $e->getMessage();
