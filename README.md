@@ -4,8 +4,6 @@
 
 ### Enlai Li
 Feature 1: User Content Submission and Dynamic URL Generation
-
-#### Files Written
 - index.html
 - display.php
 - submit.php
