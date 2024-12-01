@@ -11,11 +11,22 @@ try {
     }
     $mysqli->select_db($dbname);
 
-    // Display last submission
-    $result = $mysqli->query("SELECT content FROM user_content ORDER BY id DESC LIMIT 1");
+    // Get ID from query string
+    if (!isset($_GET["id"])) {
+        throw new Exception("No ID");
+    }
+    $id = $_GET['id'];
+
+    // Display submission
+    $result = $mysqli->execute_query(
+        "SELECT content FROM user_content WHERE id = ?",
+        [$id]
+    );
     $content = "";
     if ($result->num_rows > 0) {
         $content = $result->fetch_assoc()["content"];
+    } else {
+        throw new Exception("No Content with this ID");
     }
 } catch (Exception $e) {
     echo $e->getMessage();
@@ -31,7 +42,7 @@ try {
         <p><?php echo nl2br(htmlspecialchars($content)); ?></p>
     </div>
     <br>
-    <a href="index.html">Submit New Content</a>
+    <a href="../index.html">Submit New Content</a>
 </body>
 
 </html>
