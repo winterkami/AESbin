@@ -2,7 +2,7 @@
 
 ## Team Contributions
 
-### Enlai Li
+### Enlai Li 261068637
 Feature 1: User Content Submission and Dynamic URL Generation
 - index.html
 - display.php
