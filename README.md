@@ -13,7 +13,7 @@ Feature 1: User Content Submission and Dynamic URL Generation
 ### Chenxuan Jin
 ## Features
 
-1. User Content Submission and Dynamic URL Generation (Enlai Li)
+1. User Content Submission and Dynamic URL Generation
 
    - Each user submission is assigned a unique identifier `id` generated using a secure random algorithm.
    - All submitted content is stored in a MySQL database. The database ensures data persistence and allows for retrieval of content using the unique `id`.
