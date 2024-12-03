@@ -11,7 +11,13 @@ Feature 1: User Content Submission and Dynamic URL Generation
 - pastes/.htaccess 
 ### Aaron Elcheson
 ### Chenxuan Jin
-## Features
+Feature 1: Create login and register page with database store
+- login.html
+- login.php
+- register.php
+- register.html
+- logout.php
+- welcome.php
 
 1. User Content Submission and Dynamic URL Generation
 
