@@ -1,0 +1,47 @@
+/* aaron elcheson: 261047851 */
+
+
+/* falling letters animation in css. positioning below */
+
+@keyframes fall { 
+
+    0% {
+        transform: translateY(-100%); 
+    }
+    100% {
+        transform: translateY(100vh); 
+    }
+}
+
+.falling-letters {
+
+    position: absolute; /* position in header of landing page */
+
+    top: 0;
+    right: 0;
+    left: 0;
+
+    height: 100%; 
+    pointer-events: none; 
+
+    overflow: hidden;
+    display: flex; /* make the animation flex in the nav box */
+    justify-content: space-around; /* space out the ltrs */
+
+}
+
+.letter {
+
+    font-size: 2rem; /* letter styling */
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8); 
+    animation: fall infinite 3s linear; 
+}
+
+.letter:nth-child(1) { animation-delay: 1s; } /* simple falling animation */
+.letter:nth-child(2) { animation-delay: 2s; }
+.letter:nth-child(3) { animation-delay: 2.5s; }
+.letter:nth-child(4) { animation-delay: 3.5s; }
+.letter:nth-child(5) { animation-delay: 3.5s; }
+.letter:nth-child(6) { animation-delay: 3.5s; }
+.letter:nth-child(7) { animation-delay: 3.5s; }
