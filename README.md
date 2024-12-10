@@ -16,6 +16,11 @@ Code repository: https://github.com/eli0009/COMP307-project
 - submit.php
 - pastes/.htaccess 
 ### Aaron Elcheson
+### front end: Responsive and interactive landing_page using flexbox to accommodate multiple devices. Project logo.PNG and css animation
+falling letters in the header. Header links to 'About', 'Home', and 'Login' pages. Main content area for user to write and submit text with an option to password protect the text.
+- landing_page.html
+- logo.PNG
+- animation.css
 ### Chenxuan Jin
 Feature 1: Create login and register page with database store
 - login.html
