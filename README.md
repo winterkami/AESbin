@@ -4,7 +4,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 ## Team Contributions
 
 ### Enlai Li
-#### Feature: User Content Submission and Dynamic URL Generation
+#### Backend & Database: User content submission, Dynamic URL generation, and User content encryption
 - Each user submission is assigned a unique randomly generated identifier `id`.
 - The user submitted text is encrypted with AES using the optional password (if provided)
 - All submitted content is stored in a MySQL database. 
@@ -14,6 +14,11 @@ Code repository: https://github.com/eli0009/COMP307-project
 - submit.php (the html at the bottom of the file used Aaron's index.html as template)
 - pastes/.htaccess 
 - Aaron's index.html (connecting it to submit.php)
+#### Backend & Frontend & Database: Display user content with dynamically generated page, decryption of user content
+- Retrieve user content from SQL database and generate html page to display the content
+- Handle decryption of content using a user provided password
+#### File
+- submit.php 
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
 - landing_page (home page) using flexbox to accommodate multiple devices.

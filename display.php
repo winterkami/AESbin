@@ -13,6 +13,12 @@ function decrypt($encrypted_string, $password)
     $iv = substr($decoded, 0, $iv_length);
     $ciphertext = substr($decoded, $iv_length);
 
+    // return false if IV length incorrect 
+    //to avoid displaying error message on the website
+    if (strlen($iv) !== $iv_length) {
+        return false;
+    }
+
     $key = hash('sha256', $password, true);
     return openssl_decrypt($ciphertext, $encryption_method, $key, OPENSSL_RAW_DATA, $iv);
 }
@@ -23,48 +29,59 @@ $username = "root";
 $password = "";
 $dbname = "db";
 
-try {
-    $mysqli = new mysqli($servername, $username, $password);
-    if ($mysqli->connect_error) {
-        throw new Exception($mysqli->connect_error);
-    }
-    $mysqli->select_db($dbname);
+// global var to track the content
+$content = "";
+// global var to track decryption success
+$decryption_failed = false;
+// display content logic, for the GET method
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"])) {
+    try {
+        $mysqli = new mysqli($servername, $username, $password);
+        if ($mysqli->connect_error) {
+            throw new Exception($mysqli->connect_error);
+        }
+        $mysqli->select_db($dbname);
 
-    // Get ID from query string
-    if (!isset($_GET["id"])) {
-        throw new Exception("No ID");
-    }
-    $id = $_GET['id'];
+        // Get ID from query string
+        if (!isset($_GET["id"])) {
+            throw new Exception("No ID");
+        }
+        $id = $_GET['id'];
 
-    // Display submission
-    $result = $mysqli->execute_query(
-        "SELECT content FROM user_content WHERE id = ?",
-        [$id]
-    );
-    $content = "";
-    if ($result->num_rows > 0) {
-        $content = $result->fetch_assoc()["content"];
-    } else {
-        throw new Exception("No Content with this ID");
+        // Display submission
+        $result = $mysqli->execute_query(
+            "SELECT content FROM user_content WHERE id = ?",
+            [$id]
+        );
+        if ($result->num_rows > 0) {
+            $content = $result->fetch_assoc()["content"];
+        } else {
+            throw new Exception("No Content with this ID");
+        }
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    } finally {
+        $mysqli->close();
     }
-} catch (Exception $e) {
-    echo $e->getMessage();
-} finally {
-    $mysqli->close();
+}
+// decrypt content, for the POST method when pressing submit
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $encrypted_content = $_POST["content"];
+    $password = $_POST["password"];
+    // try to decrypt
+    $content = $encrypted_content;
+    if ($encrypted_content && $password) {
+        $decrypted_content = decrypt($encrypted_content, $password);
+        // if decryption is successful, display the plaintext
+        // otherwise set failure flag
+        if ($decrypted_content !== false) {
+            $content = $decrypted_content;
+        } else {
+            $decryption_failed = true;
+        }
+    }
 }
 ?>
-<!-- <html>
-
-<body>
-    <h1>Submitted Content</h1>
-    <div style="border: 1px solid #ccc; padding: 20px; width: 50%; margin: auto;">
-        <p><?php echo nl2br(htmlspecialchars($content)); ?></p>
-    </div>
-    <br>
-    
-</body>
-
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -285,15 +302,18 @@ try {
         </div>
     </header>
 
-    <form>
+    <form method="POST">
         <main class="main-content">
             <div class="content-inner">
                 <p>
                     Provide an optional password below to decrypt text if the text is encrypted.
                 </p>
+                <?php if ($decryption_failed): ?>
+                    <p style="color:red;margin-top:10px;" class="error">Password incorrect</p>
+                <?php endif; ?>
                 <br />
                 <div class="text-area-container">
-                    <textarea name="content" rows="10" cols="50" required><?php echo $content; ?></textarea>
+                    <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
                 </div>
             </div>
         </main>
@@ -306,13 +326,10 @@ try {
                     type="password"
                     id="password"
                     placeholder="Enter password" />
-                <button type="submit">Submit</button>
+                <button type="submit">Decrypt</button>
             </div>
         </footer>
     </form>
-    <!-- <p>
-        <a href="../index.html">Submit New Content</a>
-    </p> -->
 </body>
 
 </html>
