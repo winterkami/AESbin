@@ -191,10 +191,17 @@
       </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Recent</a></li>
-        </ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="recent.php">Recent</a></li>
+			<li><a href="login.php">Login</a></li>
+			<li>
+				<button id="logout-button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: black;">
+					Logout
+				</button>
+			</li>
+</ul>
+
       </nav>
       <!--css animation for falling lettesr: a, e, s, b, i , n-->
 
@@ -237,3 +244,22 @@
     </form>
   </body>
 </html>
+
+<script>
+    // 监听 Logout 按钮点击事件
+    document.getElementById("logout-button").addEventListener("click", function () {
+        if (confirm("Are you sure you want to log out?")) {
+            // 如果用户确认退出，向服务器发送请求
+            fetch("logout.php")
+                .then(response => {
+                    if (response.ok) {
+                        alert("You have been logged out.");
+                        window.location.href = "index.html"; // 返回到 index.html 页面
+                    } else {
+                        alert("Logout failed. Please try again.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    });
+</script>
