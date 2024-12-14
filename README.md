@@ -11,7 +11,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 - After submission, the user is redirected to a dynamically generated URL in the format http://localhost/COMP307-project/pastes/[id].
 #### Files
 - display.php
-- submit.php
+- submit.php (the html at the bottom of the file used Aaron's index.html as template)
 - pastes/.htaccess 
 - Aaron's index.html (connecting it to submit.php)
 ### Aaron Elcheson
