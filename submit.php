@@ -1,5 +1,21 @@
 <?php
 // Enlai Li 261068637
+
+// function for aes encryption
+function encrypt($string, $password)
+{
+    $encryption_method = 'aes-256-cbc';
+    // Generate a random initialization vector (IV)
+    $iv_length = openssl_cipher_iv_length($encryption_method);
+    $iv = random_bytes($iv_length);
+
+    $key = hash('sha256', $password, true);
+    $ciphertext = openssl_encrypt($string, $encryption_method, $key, OPENSSL_RAW_DATA, $iv);
+    return base64_encode($iv . $ciphertext);
+}
+
+
+// db info
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -18,12 +34,25 @@ try {
     $mysqli->query("
     CREATE TABLE IF NOT EXISTS user_content (
             id VARCHAR(255) NOT NULL UNIQUE,
-            content TEXT NOT NULL
+            content TEXT NOT NULL,
+            password BOOLEAN NOT NULL
         );
     ");
 
-    // get content
+    // get inputs 
     $content = $_POST['content'];
+    $password = $_POST['password'];
+    // encrypt content with aes if password is provided
+    if ($password) {
+        $content_db = encrypt($content, $password);
+        $password_db = true;
+    }
+    // content stays plaintext if no password
+    else {
+        $content_db = $content;
+        $password_db = false;
+    }
+
     // generate unique id that doesn't exist in the db
     $id = null;
     do {
@@ -37,8 +66,8 @@ try {
     } while ($count > 0);
     // insert content
     $mysqli->execute_query(
-        "INSERT INTO user_content (id, content) VALUES (?, ?)",
-        [$id, $content]
+        "INSERT INTO user_content (id, content, password) VALUES (?, ?, ?)",
+        [$id, $content_db, $password_db]
     );
     // redirect to unique page
     header("Location: pastes/$id");

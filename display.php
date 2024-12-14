@@ -1,5 +1,25 @@
 <?php
 // Enlai Li 261068637
+// function for aes decryption
+/**
+ * Return false if wrong password. Return the decrypted content otherwise.
+ */
+function decrypt($encrypted_string, $password)
+{
+    $encryption_method = 'aes-256-cbc';
+    // Decode the Base64-encoded string
+    $decoded = base64_decode($encrypted_string);
+
+    // Extract the IV and ciphertext
+    $iv_length = openssl_cipher_iv_length($encryption_method);
+    $iv = substr($decoded, 0, $iv_length);
+    $ciphertext = substr($decoded, $iv_length);
+
+    $key = hash('sha256', $password, true);
+    return openssl_decrypt($ciphertext, $encryption_method, $key, OPENSSL_RAW_DATA, $iv);
+}
+
+// db info
 $servername = "localhost";
 $username = "root";
 $password = "";
