@@ -10,10 +10,10 @@ Code repository: https://github.com/eli0009/COMP307-project
 - All submitted content is stored in a MySQL database. 
 - After submission, the user is redirected to a dynamically generated URL in the format http://localhost/COMP307-project/pastes/[id].
 #### Files
-- index.html
 - display.php
 - submit.php
 - pastes/.htaccess 
+- Aaron's index.html (connecting it to submit.php)
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
 - landing_page (home page) using flexbox to accommodate multiple devices.
@@ -21,7 +21,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 - Header links to 'About', 'Home', and 'Login' pages.
 - Main content area for user to write and submit text with an option to password protect the text.
 #### Files
-- landing_page.html
+- index.html
 - logo.PNG
 - animation.css
 ### Chenxuan Jin
