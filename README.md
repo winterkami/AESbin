@@ -5,12 +5,12 @@ Code repository: https://github.com/eli0009/COMP307-project
 
 ### Enlai Li
 #### Backend & Database: User content submission, Dynamic URL generation, and User content encryption
-- Each user submission is assigned a unique randomly generated identifier `id`.
+- Each user submission is assigned a unique randomly generated id
 - The user submitted text is encrypted with AES using the optional password (if provided)
-- All submitted content is stored in a MySQL database. 
-- After submission, the user is redirected to a dynamically generated URL in the format http://localhost/COMP307-project/pastes/[id].
+- All submitted content is stored in a MySQL database
+- After submission, the user is redirected to a dynamically generated URL
 #### Files
-- display.php
+- submit.php 
 - pastes/.htaccess 
 - Aaron's index.html (connecting it to submit.php)
 #### Backend & Frontend & Database: Display user content with dynamically generated page, decryption of user content
@@ -18,7 +18,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 - Handle decryption of content using a user provided password, and performs the appropriate action depending on whether the password is correct.
 - The page is different depending on whether the content is encrypted or not
 #### File
-- submit.php 
+- display.php
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
 - landing_page (home page) using flexbox to accommodate multiple devices.

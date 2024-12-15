@@ -1,6 +1,5 @@
 # Enlai Li 261068637
-# rewrite request, code from ChatGPT
-# This redirects requests to http://localhost/COMP307-project/pastes/[random_string] to display.php with id=[random_string] as a query parameter.
+# Redirects requests to http://localhost/COMP307-project/pastes/[random_string] to display.php with id=[random_string] as a query parameter
 RewriteEngine On
 RewriteBase /COMP307-project/pastes/
 RewriteRule ^([a-zA-Z0-9]+)$ ../display.php?id=$1 [L,QSA]
