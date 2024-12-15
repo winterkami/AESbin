@@ -33,6 +33,8 @@ $dbname = "db";
 $content = "";
 // global var to track decryption success
 $decryption_failed = false;
+// global var to track if the content is encrypted
+$is_encrypted = true;
 // display content logic, for the GET method
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"])) {
     try {
@@ -43,18 +45,21 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"])) {
         $mysqli->select_db($dbname);
 
         // Get ID from query string
-        if (!isset($_GET["id"])) {
-            throw new Exception("No ID");
-        }
         $id = $_GET['id'];
-
-        // Display submission
+        // Get submission from database
         $result = $mysqli->execute_query(
-            "SELECT content FROM user_content WHERE id = ?",
+            "SELECT content, password FROM user_content 
+            WHERE id = ?",
             [$id]
         );
         if ($result->num_rows > 0) {
-            $content = $result->fetch_assoc()["content"];
+            $row = $result->fetch_assoc();
+            $content = $row["content"];
+            if ($row["password"] == 1) {
+                $is_encrypted = true;
+            } else {
+                $is_encrypted = false;
+            }
         } else {
             throw new Exception("No Content with this ID");
         }
@@ -76,8 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // otherwise set failure flag
         if ($decrypted_content !== false) {
             $content = $decrypted_content;
+            $is_encrypted = false;
         } else {
             $decryption_failed = true;
+            $is_encrypted = true;
         }
     }
 }
@@ -263,6 +270,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background-color: #363f40;
         }
 
+        .footer button:disabled {
+            background-color: #363f40;
+        }
+
         /* responsive elements */
         @media (max-width: 600px) {
             .nav-links {
@@ -302,34 +313,63 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </header>
 
-    <form method="POST">
-        <main class="main-content">
-            <div class="content-inner">
-                <p>
-                    Provide an optional password below to decrypt text if the text is encrypted.
-                </p>
-                <?php if ($decryption_failed): ?>
-                    <p style="color:red;margin-top:10px;" class="error">Password incorrect</p>
-                <?php endif; ?>
-                <br />
-                <div class="text-area-container">
-                    <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
+    <!-- only display decryption zone if text is encrypted -->
+    <?php if ($is_encrypted): ?>
+        <form method="POST">
+            <main class="main-content">
+                <div class="content-inner">
+                    <p>
+                        Provide a password below to decrypt text.
+                    </p>
+                    <?php if ($decryption_failed): ?>
+                        <p style="color:red;margin-top:10px;" class="error">Incorrect decryption password. Try again!</p>
+                    <?php endif; ?>
+                    <br />
+                    <div class="text-area-container">
+                        <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
 
-        <footer class="footer">
-            <div>
-                <label for="password">Password: </label>
-                <input
-                    name="password"
-                    type="password"
-                    id="password"
-                    placeholder="Enter password" />
-                <button type="submit">Decrypt</button>
-            </div>
-        </footer>
-    </form>
+            <footer class="footer">
+                <div>
+                    <label for="password">Password: </label>
+                    <input
+                        name="password"
+                        type="password"
+                        id="password"
+                        placeholder="Enter password" />
+                    <button type="submit">Decrypt</button>
+                </div>
+            </footer>
+        </form>
+        <!-- otherwise only display the text box -->
+    <?php else: ?>
+        <form>
+            <main class="main-content">
+                <div class="content-inner">
+                    <p>
+                        Plaintext is available. No password required.
+                    </p>
+                    <br />
+                    <div class="text-area-container">
+                        <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer">
+                <div>
+                    <label for="password">Password: </label>
+                    <input
+                        name="password"
+                        type="password"
+                        id="password"
+                        placeholder="No password required" readonly />
+                    <button type="submit" disabled>Decrypt</button>
+                </div>
+            </footer>
+        </form>
+    <?php endif; ?>
 </body>
 
 </html>
