@@ -5,20 +5,19 @@ Code repository: https://github.com/eli0009/COMP307-project
 
 ### Enlai Li
 #### Backend & Database: User content submission page, User data storage in SQL database, Dynamic URL generation, and User content encryption
-- PHP backend that stores data sent from the frontend into a SQL database
+- PHP backend that stores data sent from the frontend into a SQL database, along with other data such as the date submitted
 - Each user submission is assigned a unique randomly generated id
 - The user submitted text is encrypted with AES using the optional password (if provided)
-- All submitted content is stored in a MySQL database
-- After submission, the user is redirected to a dynamically generated URL
+- After submission, the user is redirected to a dynamically generated URL using Apache's .htaccess config
 #### Backend & Frontend & Database: Dynamically generated user content display public page, decryption of user content, tracking page visits 
 - PHP backend that retrieve user content from SQL database and generate an interactive public html page to display the content
 - Handle decryption of content using a user provided password, and performs the appropriate action depending on whether the password is correct.
 - The page is different depending on whether the content is encrypted or not
 - The number of visits to a certain page is kept track of in the database
 #### Backend & Frontend & Database: Recent paste public page
-- Javascript to handle behavior of sorting buttons (Recent, popular, oldest), page buttons, and updating displayed rows and text
-- PHP backend that handles fetching content from MySQL database and sending it to the frontend
-- Support for the search bar that searches specific content in the database and displays them
+- PHP backend that handles fetching content from MySQL database and sends it to the frontend according to sort options, search terms, and page number
+- Javascript to handle behavior of dynamic elements like: sorting buttons (Recent, popular, oldest), page buttons, and search bar
+- Javascript also updates the content/text on the website dynamically by sending request to recent.php
 #### Files
 - display.php
 - submit.php 
