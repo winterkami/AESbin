@@ -36,6 +36,8 @@ try {
             id VARCHAR(255) NOT NULL UNIQUE,
             content TEXT NOT NULL,
             password BOOLEAN NOT NULL,
+            visits INT NOT NULL DEFAULT 0,
+            date DATE NOT NULL DEFAULT CURDATE(),
             PRIMARY KEY (number)
         );
     ");

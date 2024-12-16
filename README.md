@@ -4,21 +4,25 @@ Code repository: https://github.com/eli0009/COMP307-project
 ## Team Contributions
 
 ### Enlai Li
-#### Backend & Database: User content submission, Dynamic URL generation, and User content encryption
+#### Backend & Database: User content submission public landing page, User data storage in SQL database, Dynamic URL generation, and User content encryption
 - Each user submission is assigned a unique randomly generated id
 - The user submitted text is encrypted with AES using the optional password (if provided)
 - All submitted content is stored in a MySQL database
 - After submission, the user is redirected to a dynamically generated URL
-#### Files
-- submit.php 
-- pastes/.htaccess 
-- Aaron's index.html (connecting it to submit.php)
-#### Backend & Frontend & Database: Display user content with dynamically generated page, decryption of user content
+#### Backend & Frontend & Database: Dynamically generated user content display public page, decryption of user content, tracking page visites
 - Retrieve user content from SQL database and generate html page to display the content
 - Handle decryption of content using a user provided password, and performs the appropriate action depending on whether the password is correct.
 - The page is different depending on whether the content is encrypted or not
-#### File
+- The number of visits to a certain page is kept track of in the database
+#### Backend & Frontend & Database: Recent paste public page
+#### Files
 - display.php
+- submit.php 
+- recent.php
+- recent_script.js
+- pastes/.htaccess 
+- Aaron's index.html (connecting it to submit.php)
+#### File
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
 - landing_page (home page) using flexbox to accommodate multiple devices.
