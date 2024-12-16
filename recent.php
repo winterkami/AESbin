@@ -6,6 +6,11 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "db";
+// check if the request is correct
+if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET['sort']) || !isset($_GET['page'])) {
+    http_response_code(400); // Bad Request
+    exit();
+}
 
 try {
     $mysqli = new mysqli($servername, $username, $password);
