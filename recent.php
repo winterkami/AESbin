@@ -14,26 +14,28 @@ try {
     }
     $mysqli->select_db($dbname);
 
-    // Debug
-    $sort = "recent";
-    $page = 2;
+    // // Debug
+    // $sort = "recent";
+    // $page = 2;
 
-    // // get sorting method
-    // $sort = $_GET['sort'] ?? "recent";
-    // // get current page 
-    // $page = intval($_GET['page']) ?? 1;
+    // get sorting method
+    $sort = $_GET['sort'] ?? "recent";
+    // get current page 
+    $page = intval($_GET['page']) ?? 1;
+    // get search
+    $search = $_GET['search'] ?? "";
 
     // determine sorting method
     switch ($sort) {
         case 'popular':
-            $order_by = "visits DESC, id DESC";
+            $order_by = "visits DESC, number DESC";
             break;
-        case 'random':
-            $order_by = "RAND()";
+        case 'oldest':
+            $order_by = "number ASC";
             break;
         case 'recent':
         default:
-            $order_by = "id DESC";
+            $order_by = "number DESC";
             break;
     }
 
@@ -43,9 +45,12 @@ try {
 
     // get submissions in a particular order
     $result = $mysqli->execute_query(
-        "SELECT date, id, content, visits FROM user_content
-        ORDER BY ? LIMIT ? OFFSET ?",
-        [$order_by, $items_per_page + 1, $start_from]
+        "SELECT date, id, content, visits 
+        FROM user_content
+        WHERE content LIKE ?
+        ORDER BY $order_by 
+        LIMIT ? OFFSET ?",
+        ["%" . $search . "%", $items_per_page + 1, $start_from]
     );
     $rows = $result->fetch_all();
 

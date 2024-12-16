@@ -4,17 +4,21 @@ Code repository: https://github.com/eli0009/COMP307-project
 ## Team Contributions
 
 ### Enlai Li
-#### Backend & Database: User content submission public landing page, User data storage in SQL database, Dynamic URL generation, and User content encryption
+#### Backend & Database: User content submission page, User data storage in SQL database, Dynamic URL generation, and User content encryption
+- PHP backend that stores data sent from the frontend into a SQL database
 - Each user submission is assigned a unique randomly generated id
 - The user submitted text is encrypted with AES using the optional password (if provided)
 - All submitted content is stored in a MySQL database
 - After submission, the user is redirected to a dynamically generated URL
-#### Backend & Frontend & Database: Dynamically generated user content display public page, decryption of user content, tracking page visites
-- Retrieve user content from SQL database and generate html page to display the content
+#### Backend & Frontend & Database: Dynamically generated user content display public page, decryption of user content, tracking page visits 
+- PHP backend that retrieve user content from SQL database and generate an interactive public html page to display the content
 - Handle decryption of content using a user provided password, and performs the appropriate action depending on whether the password is correct.
 - The page is different depending on whether the content is encrypted or not
 - The number of visits to a certain page is kept track of in the database
 #### Backend & Frontend & Database: Recent paste public page
+- Javascript to handle behavior of sorting buttons (Recent, popular, oldest), page buttons, and updating displayed rows and text
+- PHP backend that handles fetching content from MySQL database and sending it to the frontend
+- support for search box 
 #### Files
 - display.php
 - submit.php 
@@ -22,6 +26,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent_script.js
 - pastes/.htaccess 
 - Aaron's index.html (connecting it to submit.php)
+- Aaron's recent_pastes.html (connecting it to recent.php and recent_script.js)
 #### File
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
