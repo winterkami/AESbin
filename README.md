@@ -18,7 +18,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 #### Backend & Frontend & Database: Recent paste public page
 - Javascript to handle behavior of sorting buttons (Recent, popular, oldest), page buttons, and updating displayed rows and text
 - PHP backend that handles fetching content from MySQL database and sending it to the frontend
-- support for search box 
+- support for searching specific content in the database and displaying them
 #### Files
 - display.php
 - submit.php 

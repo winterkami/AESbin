@@ -6,15 +6,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextPage = document.getElementById("nextPage");
   const pageNumber = document.getElementById("pageNumber");
   const sortButtons = document.querySelectorAll(".paste-button");
+  const searchInput = document.querySelector(".paste-search-bar input");
+  const searchButton = document.querySelector(".paste-search-bar button");
 
   // global vars
   let current_page = 1;
   let current_sort = "recent";
+  let current_search = "";
   let content_length = 40;
 
   // get entries using recent.php
-  const fetchPastes = (sort, page) => {
-    fetch(`recent.php?sort=${sort}&page=${page}`)
+  const fetchPastes = (sort, page, search = "") => {
+    fetch(
+      `recent.php?sort=${sort}&page=${page}&search=${encodeURIComponent(
+        search
+      )}`
+    )
       .then((response) => {
         return response.json();
       })
@@ -71,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // event listeners for page buttons
   prevPage.addEventListener("click", () => {
     current_page--;
-    fetchPastes(current_sort, current_page);
+    fetchPastes(current_sort, current_page, current_search);
   });
   nextPage.addEventListener("click", () => {
     current_page++;
-    fetchPastes(current_sort, current_page);
+    fetchPastes(current_sort, current_page, current_search);
   });
 
   // event listeners for sorting buttons
@@ -95,11 +102,19 @@ document.addEventListener("DOMContentLoaded", () => {
           b.classList.remove("active");
         });
         event.target.classList.add("active");
-        fetchPastes(current_sort, current_page);
+        fetchPastes(current_sort, current_page, current_search);
       }
     });
   });
 
+  // event listeners for search
+  searchButton.addEventListener("click", () => {
+    // clean the search input
+    current_search = searchInput.value.trim();
+    // debug
+    console.log(current_search);
+    fetchPastes(current_sort, current_page, current_search);
+  });
   // initial load of the page
-  fetchPastes(current_sort, current_page);
+  fetchPastes(current_sort, current_page, current_search);
 });
