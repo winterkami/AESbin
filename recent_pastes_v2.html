@@ -1,43 +1,33 @@
-
 <!-- aaron elcheson: 261047851 -> RECENT PASTES PAGE: responsive layout for recent pastes, displayed in a table and populated from the database-->
-
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aesbin Recent Pastes</title>
-    <link rel="stylesheet" href="./animation.css">
-    <link rel="stylesheet" href="./recent_pastes_styles.css"> <!-- included a recent paste page specific css sheet-->
-   
-</head>
+    <link rel="stylesheet" href="./animation.css" />
+    <link rel="stylesheet" href="./recent_pastes_styles.css" />
+    <!-- included a recent paste page specific css sheet-->
+  </head>
 
-<body>
+  <body>
+    <header class="navbar">
+      <!-- below is same as landing page until after css animation -->
 
-    <header class="navbar"> <!-- below is same as landing page until after css animation -->
+      <div class="logo">
+        <img src="./logo.PNG" />
+      </div>
 
-        <div class="logo">
-
-            <img src="./logo.PNG">
-
-        </div>
-
-        <nav>
-
-            <ul class="nav-links">
-
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Recent</a></li>
-                <li><a href="#">Login</a></li>
-
-            </ul>
-
-
-        </nav>
-<!-- 
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Recent</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </nav>
+      <!-- 
         <div class="falling-letters">
 
             <span class="letter">A</span>
@@ -48,103 +38,68 @@
             <span class="letter">n</span>
 
         </div> -->
- 
-
     </header>
 
     <!-- ############################################### MAIN TABLE AND BODY CONTENT BEGIN ####################################################-->
 
     <main class="main-content">
-        
-        <div class="paste-search-area">
-
-            <div class="paste-search-buttons">
-
-                <button class="paste-button active">Recent</button> <!-- buttons for populating the table with pastes - recent, popular, or random  (can remove any as needed)-->
-                <button class="paste-button">Popular</button>
-                <button class="paste-button">Random</button>
-
-            </div>
-
-            <div class="paste-search-bar">
-
-                <input type="text" placeholder="Paste search..." /> <!-- user can search for a paste here -->
-                <button>Search</button>
-
-            </div>
-
+      <div class="paste-search-area">
+        <div class="paste-search-buttons">
+          <button class="paste-button active">Recent</button>
+          <!-- buttons for populating the table with pastes - recent, popular, or random  (can remove any as needed)-->
+          <button class="paste-button">Popular</button>
+          <button class="paste-button">Oldest</button>
         </div>
 
-        <div class="table-container">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Posted date</th>
-                        <th>Id</th>
-                        <th>Content</th>
-                        <th>Password?</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>2024-12-15</td>
-                        <td>1</td>
-                        <td>Sample Content</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>2024-12-13</td>
-                        <td>2</td>
-                        <td>Sample Content</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>2024-12-12</td>
-                        <td>3</td>
-                        <td>Sample Content</td>
-                        <td>1</td>
-                    </tr>
-
-                    <!-- Replace the above with something similar for populating table from database --> 
-                    <!--                      
-                    <tbody>
-                    <?php foreach ($pastes as $paste): ?>
-
-                    <tr>
-
-                    <td><?php echo htmlspecialchars($paste['posted_date']); ?></td>
-                    <td><?php echo htmlspecialchars($paste['id']); ?></td>
-                    <td><?php echo htmlspecialchars($paste['content']); ?></td>
-                    <td><?php echo htmlspecialchars($paste['pw']); ?></td>
-
-                    </tr>
-
-                    <?php endforeach; ?>
-
-                </tbody> -->
-
-            </table>
-
+        <div class="paste-search-bar">
+          <input type="text" placeholder="Paste search..." />
+          <!-- user can search for a paste here -->
+          <button>Search</button>
         </div>
+      </div>
 
-        <div class="page-buttons">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Posted date</th>
+              <th>Id</th>
+              <th>Content</th>
+              <th>Visits</th>
+            </tr>
+          </thead>
 
-            <button id="prevPage" class="page-button" disabled>Previous</button>
-            <span id="pageNumber">Page 1</span>
-            <button id="nextPage" class="page-button">Next</button>
+          <tbody>
+            <tr>
+              <td>2024-12-15</td>
+              <td>1</td>
+              <td>Sample Content</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>2024-12-13</td>
+              <td>2</td>
+              <td>Sample Content</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>2024-12-12</td>
+              <td>3</td>
+              <td>Sample Content</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-          </div>
-
+      <div class="page-buttons">
+        <button id="prevPage" class="page-button" disabled>Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button id="nextPage" class="page-button">Next</button>
+      </div>
     </main>
 
-    <footer class="footer">
-
-    
-
-    </footer>
-</body>
-
+    <footer class="footer"></footer>
+    <script src="recent_script.js"></script>
+  </body>
 </html>

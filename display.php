@@ -46,6 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"])) {
 
         // Get ID from query string
         $id = $_GET['id'];
+        // Increment visit count for recent page's popular tab
+        $mysqli->execute_query(
+            "UPDATE user_content SET visits = visits + 1  
+            WHERE id = ?",
+            [$id]
+        );
         // Get submission from database
         $result = $mysqli->execute_query(
             "SELECT content, password FROM user_content 
@@ -271,7 +277,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .footer button:disabled {
-            background-color: #363f40;
+            background-color: grey;
+
+            cursor: not-allowed;
         }
 
         /* responsive elements */
@@ -345,7 +353,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
         <!-- otherwise only display the text box -->
     <?php else: ?>
-        <form>
+        <form method="GET">
             <main class="main-content">
                 <div class="content-inner">
                     <p>
