@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aesbin Home</title>
     <link rel="stylesheet" href="./animation.css" />
-    <style>
+    <link rel="stylesheet" href="./general_styles.css">
+    <!-- <style>
       * {
         margin: 0;
         padding: 0;
@@ -181,7 +182,7 @@
           gap: 5px;
         }
       }
-    </style>
+    </style> -->
   </head>
 
   <body>
@@ -191,12 +192,15 @@
       </div>
       <nav>
         <ul class="nav-links">
-			<li><a href="index.html">Home</a></li>
+			<li><a href="./index.html">Home</a></li>
 			<li><a href="#">About</a></li>
-			<li><a href="recent.php">Recent</a></li>
-			<li><a href="login.php">Login</a></li>
+			<li><a href="./recent.php">Recent</a></li>
+			<li><a href="./login.php">Login</a></li>
+      
+      
 			<li>
-				<button id="logout-button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: black;">
+				<button id="logout-button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: black; font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;">
 					Logout
 				</button>
 			</li>
@@ -215,19 +219,30 @@
       </div>
     </header>
 
-    <form action="submit.php" method="POST">
+    <div class="picture-box">
+
+      <img class = "picture-box" src="./nebula.jpg" alt="image of the horsehead nebula">
+
+  </div>
+
+    <form action="./submit.php" method="POST">
       <main class="main-content">
+
+
+        <p style="font-family: 'Courier New', Courier, monospace; color: white;">
+          Type your paste here and hit the submit button below. Provide an
+          optional password below.
+        </p>
         <div class="content-inner">
-          <p>
-            Type your paste here and hit the submit button below. Provide an
-            optional password below.
-          </p>
-          <br />
+         
+          <!-- <br /> -->
           <div class="text-area-container">
             <textarea name="content" rows="10" cols="50" required></textarea>
           </div>
         </div>
       </main>
+
+      </form>
 
       <footer class="footer">
         <div>
