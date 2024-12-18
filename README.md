@@ -38,12 +38,22 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent_pastes page using flexbox and media queries for multiple devices
 - custom style sheet for flex elements (table of recent pastes)
 - table area has search options for pastes and page buttons to navigate table
+#### Front end: Responsive and interactive private user dashboard page
+- private user page with custom dashboard banner image
+- using flexbox and media queries for multiple devices
+- recent pastes are displayed in a flex container
+- user information like name, registration date, and number of pastes is displayed in a flex container
+- dynamic service canada weather widget also displayed in flex container
+
 #### Files
 - index.html
 - logo.PNG
+- nebula.jpg
 - animation.css
 - recent_pastes_v2.html
 - recent_pastes_styles.css
+- dashboard.html
+- general_styles.css
 ### Chenxuan Jin
 Feature 1: Create login and register page with database store
 - login.html
