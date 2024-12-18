@@ -1,6 +1,15 @@
 # COMP307-project
 ## URLS
 Code repository: https://github.com/eli0009/COMP307-project
+## Project setup
+1. Install XAMPP version 8.2.12 / PHP 8.2.12: https://www.apachefriends.org/download.html
+2. Navigate to `C:\xampp\htdocs\` or wherever you installed XAMPP's `htdocs` and unzip the project zip file. Or run the following inside `htdocs`:
+```
+git clone https://github.com/eli0009/COMP307-project.git
+```
+3. Open XAMPP Control Panel and start Apache and MySQL modules
+4. Open http://localhost/COMP307-project/ or http://localhost/COMP307-project-main in the browser (depending on the folder name of the project in htdocs)
+
 ## Team Contributions
 
 ### Enlai Li
@@ -24,10 +33,10 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent.php
 - recent_script.js
 - database_create.php
-- pastes/.htaccess 
+- pastes/.htaccess
+- README.md project setup instruction
 - Aaron's index.html (connecting it to submit.php)
 - Aaron's recent_pastes.html (connecting it to recent.php and recent_script.js)
-#### File
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
 - landing_page (home page) using flexbox to accommodate multiple devices.
