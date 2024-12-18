@@ -1,23 +1,23 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // 获取表单数据
-    $login = htmlspecialchars(trim($_POST['login'])); // 用户名或邮箱
-    $password = htmlspecialchars(trim($_POST['password'])); // 用户输入的密码
+    // Retrieve form data
+    $login = htmlspecialchars(trim($_POST['login'])); // Username or email
+    $password = htmlspecialchars(trim($_POST['password'])); // User's input password
 
-    // 数据库配置
+    // Database configuration
     $servername = "localhost";
     $username = "root";
-    $db_password = ""; // 数据库密码
-    $dbname = "db"; // 数据库名
+    $db_password = ""; // Database password
+    $dbname = "db"; // Database name
 
     try {
-        // 连接数据库
+        // Connect to the database
         $conn = new mysqli($servername, $username, $db_password, $dbname);
         if ($conn->connect_error) {
             throw new Exception("Database connection failed: " . $conn->connect_error);
         }
 
-        // 确保表 `user_account` 存在
+        // Ensure the `user_account` table exists
         $conn->query("
         CREATE TABLE IF NOT EXISTS user_account (
             number INT NOT NULL AUTO_INCREMENT,
@@ -28,20 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         );
         ");
 
-        // 查询用户名或邮箱是否存在（假设此处是 `user_account` 表中存储的用户信息）
+        // Query to check if username or email exists
         $sql = "SELECT * FROM user_account WHERE (id = ? OR content = ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $login, $login); // `id` 或 `content` 替换为用户名或邮箱字段
+        $stmt->bind_param("ss", $login, $login); // Bind username/email to the query
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            // 验证密码
-            if (password_verify($password, $user['content'])) { // 假设 `content` 字段存储了加密后的密码
+            // Verify the password
+            if (password_verify($password, $user['content'])) { // Assuming `content` stores the hashed password
                 session_start();
-                $_SESSION['user_id'] = $user['number']; // 存储用户的主键 ID
-                $_SESSION['username'] = $user['id']; // 假设 `id` 是用户名
+                $_SESSION['user_id'] = $user['number']; // Store user's primary ID
+                $_SESSION['username'] = $user['id'];    // Store username
                 echo "<script>alert('Login successful!'); window.location.href='index.html';</script>";
             } else {
                 echo "<script>alert('Invalid password. Please try again.');</script>";
@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "<script>alert('No user found with that username or email.');</script>";
         }
 
+        // Close statement and connection
         $stmt->close();
         $conn->close();
     } catch (Exception $e) {

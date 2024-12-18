@@ -192,21 +192,15 @@
       </div>
       <nav>
         <ul class="nav-links">
-			<li><a href="./index.html">Home</a></li>
-			<li><a href="./about.html">About</a></li>
-			<li><a href="./recent_pastes_v2.html">Recent</a></li>
-			<li><a href="./login.php">Login</a></li>
-      <li><a href="./dashboard.html">Dashboard</a></li>
-      
-      
-			<li>
-				<button id="logout-button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: black; font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;">
-					Logout
-				</button>
-			</li>
-</ul>
-
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./recent_pastes_v2.html">Recent</a></li>
+          <li><a href="./login.php" id="login-button">Login</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li>
+            <a href="#" id="logout-button" style="cursor: pointer; font-weight: bold;">Logout</a>
+          </li>
+        </ul>
       </nav>
       <!--css animation for falling lettesr: a, e, s, b, i , n-->
 
@@ -265,21 +259,52 @@
   </body>
 </html>
 
+
 <script>
-    // 监听 Logout 按钮点击事件
-    document.getElementById("logout-button").addEventListener("click", function () {
-        if (confirm("Are you sure you want to log out?")) {
-            // 如果用户确认退出，向服务器发送请求
-            fetch("logout.php")
-                .then(response => {
-                    if (response.ok) {
-                        alert("You have been logged out.");
-                        window.location.href = "index.html"; // 返回到 index.html 页面
-                    } else {
-                        alert("Logout failed. Please try again.");
-                    }
+    //Chenxuan Jin 261074669
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginButton = document.getElementById("login-button");
+      const logoutButton = document.getElementById("logout-button");
+
+      // 检查用户的登录状态
+      function checkLoginStatus() {
+        fetch("check_session.php", { cache: "no-store" })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.loggedIn) {
+                    // 已登录状态
+                    loginButton.textContent = "Logged";
+                    loginButton.style.pointerEvents = "none";
+                    loginButton.style.color = "gray";
+                  } else {
+                    // 未登录状态
+                    loginButton.textContent = "Login";
+                    loginButton.style.pointerEvents = "auto";
+                    loginButton.style.color = "";
+                  }
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => console.error("Error checking login status:", error));
+      }
+
+      // 监听 Logout 按钮
+      logoutButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (confirm("Are you sure you want to log out?")) {
+          fetch("logout.php", { cache: "no-store" })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.loggedOut) {
+                      alert("You have been logged out.");
+                      checkLoginStatus(); // 更新登录状态
+                    }
+                  })
+                  .catch(error => console.error("Error during logout:", error));
         }
+      });
+
+      // 页面加载时检查状态
+      checkLoginStatus();
     });
+
+
 </script>
