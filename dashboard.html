@@ -23,7 +23,7 @@
                     <li><a href="./index.html">Home</a></li>
                     <li><a href="./about.html">About</a></li>
                     <li><a href="./recent_pastes_v2.html">Recent</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="./logout.php" id="logout-button">Logout</a></li>
                 </ul>
             </nav>
             <!--css animation for falling lettesr: a, e, s, b, i , n-->
@@ -151,3 +151,27 @@
 
         </body>
         </html>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const logoutButton = document.getElementById("logout-button");
+
+        logoutButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (confirm("Are you sure you want to log out?")) {
+                fetch("logout.php", { cache: "no-store" })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.loggedOut) {
+                            alert("You have been logged out.");
+                            window.location.href = "dashboard.html";
+                        } else {
+                            alert("Logout failed. Please try again.");
+                        }
+                    })
+                    .catch((error) => console.error("Error during logout:", error));
+            }
+        });
+    });
+</script>

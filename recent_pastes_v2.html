@@ -13,35 +13,26 @@
 
   <body>
     <header class="navbar">
-      <!-- below is same as landing page until after css animation -->
-
       <div class="logo">
-        <img src="./logo.PNG" />
+        <img src="./logo.PNG" alt="Logo" />
       </div>
-
       <nav>
         <ul class="nav-links">
           <li><a href="./index.html">Home</a></li>
           <li><a href="./about.html">About</a></li>
           <li><a href="./recent_pastes_v2.html">Recent</a></li>
-          <li><a href="./login.php">Login</a></li>
           <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./login.php" id="login-button">Login</a></li>
+          <li>
+            <a href="./logout.php" id="logout-button" style="cursor: pointer; font-weight: bold;">Logout</a>
+          </li>
         </ul>
       </nav>
-      <!-- 
-        <div class="falling-letters">
-
-            <span class="letter">A</span>
-            <span class="letter">E</span>
-            <span class="letter">S</span>
-            <span class="letter">b</span>
-            <span class="letter">i</span>
-            <span class="letter">n</span>
-
-        </div> -->
     </header>
 
-    <!-- ############################################### MAIN TABLE AND BODY CONTENT BEGIN ####################################################-->
+
+
+  <!-- ############################################### MAIN TABLE AND BODY CONTENT BEGIN ####################################################-->
 
     <main class="main-content">
       <div class="paste-search-area">
@@ -104,3 +95,50 @@
     <script src="recent_script.js"></script>
   </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginButton = document.getElementById("login-button");
+    const logoutButton = document.getElementById("logout-button");
+
+
+    function checkLoginStatus() {
+      fetch("check_session.php", { cache: "no-store" })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.loggedIn) {
+
+                  loginButton.textContent = "Logged";
+                  loginButton.style.pointerEvents = "none"; // 禁用点击
+                  loginButton.style.color = "gray";
+                } else {
+
+                  loginButton.textContent = "Login";
+                  loginButton.style.pointerEvents = "auto";
+                  loginButton.style.color = "";
+                }
+              })
+              .catch((error) => console.error("Error checking login status:", error));
+    }
+
+
+    logoutButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (confirm("Are you sure you want to log out?")) {
+        fetch("logout.php", { cache: "no-store" })
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.loggedOut) {
+                    alert("You have been logged out.");
+                    window.location.href = "recent_pastes_v2.html";
+                    checkLoginStatus();
+                  }
+                })
+                .catch((error) => console.error("Error during logout:", error));
+      }
+    });
+
+
+    checkLoginStatus();
+  });
+</script>
