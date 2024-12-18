@@ -1,0 +1,94 @@
+<!--Aaron elcheson: 261047851
+About.html 
+This is the about page for the website with instructions for use and community page-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aesbin About</title>
+    <link rel="stylesheet" href="./animation.css" />
+    <link rel="stylesheet" href="./general_styles.css" />
+    <!-- included a recent paste page specific css sheet-->
+  </head>
+
+  <body>
+    <header class="navbar">
+      <!-- below is same as landing page until after css animation -->
+
+      <div class="logo">
+        <img src="./logo.PNG" />
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="./recent_pastes_v2.html">Recent</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+       
+        <div class="falling-letters">
+
+            <span class="letter">A</span>
+            <span class="letter">E</span>
+            <span class="letter">S</span>
+            <span class="letter">b</span>
+            <span class="letter">i</span>
+            <span class="letter">n</span>
+
+        </div>
+    </header>
+    
+    <!-- FLEX BOX INLINE STYLES FOR CUSTOM ABOUT PAGE SECTION : Information box, decorative sidebars and iframe -->
+
+    <div style="display: flex; flex-direction: column; margin: 1rem; height: 68vh; border-radius: 0.2rem; gap: 1rem; ">
+        
+        <div style="display: flex; flex: 1; gap: 1rem;">
+
+            <div style="flex: 3; padding: 0.5rem; background-color:#c3caca; border-radius: 0.2rem; border-style: solid; border-color: #363F40; gap: 1rem;">
+                
+                <article style="font-family: 'Courier New', Courier, monospace; "> 
+                    <h1 style="margin-left: 1rem;"> Hello and welcome to AESbin! </h1> 
+                    <p style="margin: 1rem; font-weight: bold;"> Our website is a platform for students to share notes in the form of plain text files. We call these text files 'pastes'.
+                        <br></br>
+                    To use our website, navigate to the 'Home' page index.html and type your paste in the box. An optional text box below the submission area allows the user to encrypt their paste with
+                    a password. Hitting the submit button will bring the user to a page displaying their submitted paste. If the user has encrypted their paste, an encryption key will appear.
+                    Entering the correct password will display the paste. <br></br>
+                    Users can navigate to 'Recent' to see a page of recently posted pastes and their statistics. <br></br>
+                    Users can navigate to 'Dashboard' to see their custom dashboard, displaying recent pastes, a custom banner image, and custom service Canada weather widget.
+                    <br></br>
+                  
+                    </p> </article>
+
+            </div>
+
+            <div style="flex: 1; padding: 0.5rem; background-color: #363F40; border-radius: 0.2rem; border-style: solid; border-color:#363F40; gap: 1rem; display: inline-block;">
+                <img class="picture-box" style="width: 65%; height: 65%; object-fit: cover; align-items: center; c:\Users\Aaron\Downloads\stars.jpgdisplay: inline-block;"  src="./moon.jpg">
+            </div>
+        </div>
+    
+        <!-- IMAGE SECTION - PHOTOGRAPHER IS MY MOM -->
+
+        <div style="display: flex; height: 15rem; gap: 1rem; margin-top: 1rem;">
+            <div style="flex: 2; padding: 0.2rem; background-color: #363F40;; border-radius: 0.2rem; border-style: solid; border-color: #363F40; gap: 1rem;">
+                
+                <img class="picture-box" style="width: 100%; height: 90%; object-fit: cover; margin: auto;" src="./stars.jpg">
+            </div>
+            <div style="flex: 1; padding: 0.5rem; margin:0.2rem; background-color:  #363F40; justify-content: center; align-items: center; border-radius: 0.2rem; border-style: solid; border-color: #363F40; ">
+                <!-- <iframe src="https://www.youtube.com/" style="width: 100%; height: 100%; border: none; "></iframe> -->
+                <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jfKfPfyJRdk" title="lofi hip hop radio 📚 beats to relax/study to" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+                gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    
+        
+        
+    </div>
+
+    </body>
+    <footer class="footer" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; border-radius: 0.5rem;"> AESbin 2024</footer>
+    </html>
