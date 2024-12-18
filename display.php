@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php endif; ?>
                     <br />
                     <div class="text-area-container">
-                        <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
+                        <textarea name="content" rows="10" cols="50" style="height: 200px; box-sizing: border-box; resize: vertical; width: 80%; object-fit: contain;" required readonly><?php echo $content; ?></textarea>
                     </div>
                 </div>
             </main>
@@ -194,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="content-inner">
                     <br />
                     <div class="text-area-container">
-                        <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
+                        <textarea name="content" rows="10" cols="50" style="height: 200px; box-sizing: border-box; resize: vertical; width: 80%; object-fit: contain;" required readonly><?php echo $content; ?></textarea>
                     </div>
                 </div>
             </main>
