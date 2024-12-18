@@ -122,9 +122,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <nav>
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="../about.html">About</a></li>
                 <li><a href="../recent_pastes_v2.html">Recent</a></li>
                 <li><a href="../login.php">Login</a></li>
+                <li><a href="../dashboard.html">Dashboard</a></li>
 
 
                 <li>
@@ -165,9 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php if ($decryption_failed): ?>
                         <p style="color:red;margin-top:10px;" class="error">Incorrect decryption password. Try again!</p>
                     <?php endif; ?>
-                    <br />
                     <div class="text-area-container">
-                        <textarea name="content" rows="10" cols="50" style="height: 200px; box-sizing: border-box; resize: vertical; width: 80%; object-fit: contain;" required readonly><?php echo $content; ?></textarea>
+                        <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
                     </div>
                 </div>
             </main>
@@ -192,9 +192,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     Plaintext is available. No password required.
                 </p>
                 <div class="content-inner">
-                    <br />
                     <div class="text-area-container">
-                        <textarea name="content" rows="10" cols="50" style="height: 200px; box-sizing: border-box; resize: vertical; width: 80%; object-fit: contain;" required readonly><?php echo $content; ?></textarea>
+                        <textarea name="content" rows="10" cols="50" required readonly><?php echo $content; ?></textarea>
                     </div>
                 </div>
             </main>
