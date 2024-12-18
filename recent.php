@@ -1,6 +1,9 @@
 <?php
 // Enlai Li 261068637
 
+// make sure database exists
+require_once "database_create.php";
+
 // db info
 $servername = "localhost";
 $username = "root";

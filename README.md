@@ -23,6 +23,7 @@ Code repository: https://github.com/eli0009/COMP307-project
 - submit.php 
 - recent.php
 - recent_script.js
+- database_create.php
 - pastes/.htaccess 
 - Aaron's index.html (connecting it to submit.php)
 - Aaron's recent_pastes.html (connecting it to recent.php and recent_script.js)

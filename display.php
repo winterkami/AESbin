@@ -22,7 +22,8 @@ function decrypt($encrypted_string, $password)
     $key = hash('sha256', $password, true);
     return openssl_decrypt($ciphertext, $encryption_method, $key, OPENSSL_RAW_DATA, $iv);
 }
-
+// make sure database exists
+require_once "database_create.php";
 // db info
 $servername = "localhost";
 $username = "root";
