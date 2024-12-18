@@ -185,10 +185,13 @@ body {
         flex: 1; /* make room on resizing  */
         display: flex;
         flex-direction: column; /* flex in column  */
-        width: 100%;
-        margin: 1rem;
+        width: 90%;
+      
+        margin: 1.5rem;
         align-items: center;
-        padding: 10rem;
+        /* padding: 10rem; */
+        padding: 2rem;
+        padding-bottom: 4rem;
         gap: 1.5rem;
         
         border: 0.5rem solid #bfb8bd;
@@ -211,6 +214,7 @@ body {
         /* max-width: 600px; */
         text-align: center;
         
+        
       }
 
       /* responsive sizing for text box area */
@@ -227,6 +231,7 @@ body {
         font-size: 1rem;
         /* resize: both;
         box-sizing: border-box; */
+        padding-bottom: 10rem;
       }
 
      
@@ -236,6 +241,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+        flex: 1;
     
         width: 100%;
         margin-top: auto; /* keep footer on bottom */
@@ -244,7 +250,8 @@ body {
     
         padding: 2rem;
         border-radius: 0.5;
-        gap: 2rem;
+        /* gap: 2rem; */
+        margin-top: 5rem;
 
     
     }
