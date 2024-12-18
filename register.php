@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            // Ensure `user_content` table exists
+            // Ensure `user_account` table exists
             $conn->query("
-            CREATE TABLE IF NOT EXISTS user_content (
+            CREATE TABLE IF NOT EXISTS user_account (
                 number INT NOT NULL AUTO_INCREMENT,
                 id VARCHAR(255) NOT NULL UNIQUE, -- Username or email
                 content TEXT NOT NULL,          -- Encrypted password
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ");
 
             // Check if username or email already exists
-            $sql_check = "SELECT * FROM user_content WHERE id = ?";
+            $sql_check = "SELECT * FROM user_account WHERE id = ?";
             $stmt_check = $conn->prepare($sql_check);
             $stmt_check->bind_param("s", $email); // Assuming email is unique
             $stmt_check->execute();
@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt_check->close();
             } else {
                 $stmt_check->close();
-                // Insert user data into `user_content` table
-                $sql = "INSERT INTO user_content (id, content, password) VALUES (?, ?, ?)";
+                // Insert user data into `user_account` table
+                $sql = "INSERT INTO user_account (id, content, password) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $is_password_encrypted = true; // Indicates if encrypted
                 $stmt->bind_param("ssi", $email, $hashed_password, $is_password_encrypted);
@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             height: 100vh;
             margin: 0;
         }
+
         form {
             border: 1px solid #ccc;
             padding: 20px;
@@ -90,17 +92,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             width: 300px;
             background-color: #f9f9f9;
         }
+
         form h2 {
             margin-bottom: 20px;
             text-align: center;
         }
-        input[type="text"], input[type="email"], input[type="password"] {
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -111,14 +118,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             color: white;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
         }
+
         .hint {
             font-size: 0.8rem;
             color: #666;
             margin-bottom: 5px;
         }
+
         .tooltip {
             font-size: 0.8rem;
             color: #666;
@@ -127,17 +137,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     </style>
 </head>
+
 <body>
     <form method="POST" action="">
         <h2>Register</h2>
         <label for="username">Username</label>
         <span class="hint">Choose a unique username (3-20 characters).</span>
         <input type="text" name="username" id="username" placeholder="Enter username" required>
-        
+
         <label for="email">Email</label>
         <span class="hint">Enter a valid email address (e.g., example@example.com).</span>
         <input type="email" name="email" id="email" placeholder="Enter email" required>
-        
+
         <label for="password">Password</label>
         <span class="hint">
             Password must include:
@@ -150,12 +161,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </ul>
         </span>
         <input type="password" name="password" id="password" placeholder="Enter a strong password" required>
-        
+
         <label for="confirm_password">Confirm Password</label>
         <span class="hint">Re-enter the password to confirm it matches.</span>
         <input type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter password" required>
-        
+
         <button type="submit">Register</button>
     </form>
 </body>
+
 </html>
