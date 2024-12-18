@@ -113,6 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
     current_search = searchInput.value.trim();
     // debug
     console.log(current_search);
+    // set current page to 1 to prevent bugs
+    current_page = 1;
     fetchPastes(current_sort, current_page, current_search);
   });
   // initial load of the page
