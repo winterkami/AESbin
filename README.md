@@ -44,6 +44,9 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent pastes are displayed in a flex container
 - user information like name, registration date, and number of pastes is displayed in a flex container
 - dynamic service canada weather widget also displayed in flex container
+- #### Front end: Responsive and interactive public About page
+- public about pages with site information, custom photos, and youtube video embed
+- using inline flexbox styles for responsive layout
 
 #### Files
 - index.html
@@ -54,6 +57,10 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent_pastes_styles.css
 - dashboard.html
 - general_styles.css
+- about.html
+- moon.jpg
+- stars.jpg
+  
 ### Chenxuan Jin
 Feature 1: Create login and register page with database store
 - login.html
