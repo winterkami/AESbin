@@ -17,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             throw new Exception("Database connection failed: " . $conn->connect_error);
         }
 
-        // 确保表 `user_content` 存在
+        // 确保表 `user_account` 存在
         $conn->query("
-        CREATE TABLE IF NOT EXISTS user_content (
+        CREATE TABLE IF NOT EXISTS user_account (
             number INT NOT NULL AUTO_INCREMENT,
             id VARCHAR(255) NOT NULL UNIQUE,
             content TEXT NOT NULL,
@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         );
         ");
 
-        // 查询用户名或邮箱是否存在（假设此处是 `user_content` 表中存储的用户信息）
-        $sql = "SELECT * FROM user_content WHERE (id = ? OR content = ?)";
+        // 查询用户名或邮箱是否存在（假设此处是 `user_account` 表中存储的用户信息）
+        $sql = "SELECT * FROM user_account WHERE (id = ? OR content = ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $login, $login); // `id` 或 `content` 替换为用户名或邮箱字段
         $stmt->execute();
@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin: 0;
             background-color: #f7f7f7;
         }
+
         form {
             border: 1px solid #ccc;
             padding: 20px;
@@ -82,17 +84,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             width: 300px;
             background-color: #fff;
         }
+
         form h2 {
             margin-bottom: 20px;
             text-align: center;
         }
-        input[type="text"], input[type="password"] {
+
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -103,48 +109,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             color: white;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
         }
+
         .hint {
             font-size: 0.8rem;
             color: #666;
             margin-bottom: 5px;
         }
+
         .register {
             margin-top: 10px;
             text-align: center;
             font-size: 0.9rem;
         }
+
         .register a {
             color: #007BFF;
             text-decoration: none;
         }
+
         .register a:hover {
             text-decoration: underline;
         }
+
         .error {
             color: red;
             font-size: 0.9rem;
         }
     </style>
 </head>
+
 <body>
     <form method="POST" action="">
         <h2>Login</h2>
         <label for="login">Username or Email</label>
         <span class="hint">Enter your registered username or email address.</span>
         <input type="text" name="login" id="login" placeholder="Username or Email" required>
-        
+
         <label for="password">Password</label>
         <span class="hint">Enter your password (case-sensitive).</span>
         <input type="password" name="password" id="password" placeholder="Password" required>
-        
+
         <button type="submit">Login</button>
-        
+
         <div class="register">
             Don't have an account? <a href="register.php">Register here</a>
         </div>
     </form>
 </body>
+
 </html>

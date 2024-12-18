@@ -1,20 +1,29 @@
 # COMP307-project
 ## URLS
 Code repository: https://github.com/eli0009/COMP307-project
+## Project setup
+1. Install XAMPP version 8.2.12 / PHP 8.2.12: https://www.apachefriends.org/download.html
+2. Navigate to `C:\xampp\htdocs\` or wherever you installed XAMPP's `htdocs` and unzip the project zip file. Or run the following inside `htdocs`:
+```
+git clone https://github.com/eli0009/COMP307-project.git
+```
+3. Open XAMPP Control Panel and start Apache and MySQL modules
+4. Open http://localhost/COMP307-project/ or http://localhost/COMP307-project-main in the browser (depending on the folder name of the project in htdocs)
+
 ## Team Contributions
 
 ### Enlai Li
-#### Backend & Database: User content submission page, User data storage in SQL database, Dynamic URL generation, and User content encryption
+#### Backend & Database: User content submission public page
 - PHP backend that stores data sent from the frontend into a SQL database, along with other data such as the date submitted
 - Each user submission is assigned a unique randomly generated id
 - The user submitted text is encrypted with AES using the optional password (if provided)
 - After submission, the user is redirected to a dynamically generated URL using Apache's .htaccess config
-#### Backend & Frontend & Database: Dynamically generated user content display public page, decryption of user content, tracking page visits 
+#### Backend & Frontend & Database: Dynamically generated user content display private page
 - PHP backend that retrieve user content from SQL database and generate an interactive public html page to display the content
-- Handle decryption of content using a user provided password, and performs the appropriate action depending on whether the password is correct.
+- Handle decryption of content using a user provided password, and performs the appropriate error handling in case of wrong/empty password.
 - The page is different depending on whether the content is encrypted or not
-- The number of visits to a certain page is kept track of in the database
-#### Backend & Frontend & Database: Recent paste public page
+- Tracking the number of visits to a certain page and keeping track of it in the database
+#### Backend & Frontend & Database: Recent paste public page to view all user submitted entries
 - PHP backend that handles fetching content from MySQL database and sends it to the frontend according to sort options, search terms, and page number
 - Javascript to handle behavior of dynamic elements like: sorting buttons (Recent, popular, oldest), page buttons, and search bar
 - Javascript also updates the content/text on the website dynamically by sending request to recent.php
@@ -24,10 +33,10 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent.php
 - recent_script.js
 - database_create.php
-- pastes/.htaccess 
+- pastes/.htaccess
+- README.md project setup instruction
 - Aaron's index.html (connecting it to submit.php)
 - Aaron's recent_pastes.html (connecting it to recent.php and recent_script.js)
-#### File
 ### Aaron Elcheson
 #### Front end: Responsive and interactive landing_page
 - landing_page (home page) using flexbox to accommodate multiple devices.
@@ -44,6 +53,9 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent pastes are displayed in a flex container
 - user information like name, registration date, and number of pastes is displayed in a flex container
 - dynamic service canada weather widget also displayed in flex container
+- #### Front end: Responsive and interactive public About page
+- public about pages with site information, custom photos, and youtube video embed
+- using inline flexbox styles for responsive layout
 
 #### Files
 - index.html
@@ -54,6 +66,10 @@ Code repository: https://github.com/eli0009/COMP307-project
 - recent_pastes_styles.css
 - dashboard.html
 - general_styles.css
+- about.html
+- moon.jpg
+- stars.jpg
+  
 ### Chenxuan Jin
 Feature 1: Create login and register page with database store
 - login.html
