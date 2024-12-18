@@ -103,6 +103,7 @@ body {
     min-height: 100vh; 
 
     background-color: #8F99A6;
+    
 
 }
 
@@ -111,7 +112,7 @@ body {
 
     display: flex;
     flex: 1;
-
+   
     background-color: #8F99A6;
     flex-wrap: wrap;
 
@@ -144,6 +145,8 @@ body {
     border-radius: 6px;
 
     background-color: #444;
+    order: 1;
+   
 
 }
 
@@ -155,8 +158,24 @@ body {
 
     align-items: center;
     padding: 1.5rem;
+   
+    gap: 1.5rem;
+
+}
+
+.weather{ /* weather widget from service canada website styling box */
+
+    flex: 1; /* make room on resizing  */
+    display: flex;
+    flex-direction: column; /* flex in column  */
+
+    align-items: center;
+    /* justify-content: right; */
+    /* order: 4; */
+    padding: 1.5rem;
     
     gap: 1.5rem;
+
 
 }
 
@@ -175,6 +194,7 @@ body {
         border: 0.5rem solid #bfb8bd;
         border-radius: 0.5rem;
         background-color: #4d5859;
+        
         
 
         
@@ -300,6 +320,7 @@ body {
     
     margin-right: auto;
     gap: 1rem;  /* space between flex boxes  */
+    order: 2;
 
 }
 
@@ -434,17 +455,19 @@ cursor: not-allowed;
 .table-container {
 
 /* TRYINGTO add scrollbar for table when screen is mobile */
-width: 100%;
+width: 90%;
 max-width: 90rem;
 height: 400px; 
 
-/* overflow-y: auto; 
-overflow-x: auto; */
+
 border-radius: 0.3rem;
 
 padding: 1rem;
 
 background-color: #363F40;
+order: 2;
+margin-right: auto;
+
 
 
 }
@@ -455,6 +478,11 @@ width: 100%;
 border-collapse: collapse;
 
 background-color: #79838C;
+order: 2;
+padding: 1rem;
+margin-right: auto;
+
+
 
 }
 
@@ -463,10 +491,13 @@ th, td {
  
 font-size: 0.9rem; 
 text-align: center;
+margin-right: auto;
 
 word-wrap: break-word;
 
 padding: 0.5rem;
+
+
 
 }
 
@@ -508,15 +539,27 @@ padding: 0.4rem;
 
 .table-container { /* table should resize on smaller screens */
 
-height: 300px; 
+/* height: 300px;  */
+padding: 1rem;
 
+margin-right: auto;
+flex: 1;
+
+}
+
+.table{
+
+    padding: 1rem;
+    
+    
 }
 
 th, td {
 
 font-size: 0.7rem;
 
-padding: 0.4rem;
+padding: 0.2rem;
+flex: 1;
 
 }
 
@@ -590,4 +633,6 @@ tr:nth-child(odd) {
         gap: 1rem;
 
     }
+
+    
 }
