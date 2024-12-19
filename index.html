@@ -186,7 +186,8 @@
   </head>
 
   <body>
-    <header class="navbar">
+    <script src="common.js"></script>
+  <header class="navbar">
       <div class="logo">
         <img src="./logo.PNG" />
       </div>
@@ -259,52 +260,3 @@
   </body>
 </html>
 
-
-<script>
-    //Chenxuan Jin 261074669
-    document.addEventListener("DOMContentLoaded", function () {
-      const loginButton = document.getElementById("login-button");
-      const logoutButton = document.getElementById("logout-button");
-
-      // 检查用户的登录状态
-      function checkLoginStatus() {
-        fetch("check_session.php", { cache: "no-store" })
-                .then(response => response.json())
-                .then(data => {
-                  if (data.loggedIn) {
-                    // 已登录状态
-                    loginButton.textContent = "Logged";
-                    loginButton.style.pointerEvents = "none";
-                    loginButton.style.color = "gray";
-                  } else {
-                    // 未登录状态
-                    loginButton.textContent = "Login";
-                    loginButton.style.pointerEvents = "auto";
-                    loginButton.style.color = "";
-                  }
-                })
-                .catch(error => console.error("Error checking login status:", error));
-      }
-
-      // 监听 Logout 按钮
-      logoutButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (confirm("Are you sure you want to log out?")) {
-          fetch("logout.php", { cache: "no-store" })
-                  .then(response => response.json())
-                  .then(data => {
-                    if (data.loggedOut) {
-                      alert("You have been logged out.");
-                      checkLoginStatus(); // 更新登录状态
-                    }
-                  })
-                  .catch(error => console.error("Error during logout:", error));
-        }
-      });
-
-      // 页面加载时检查状态
-      checkLoginStatus();
-    });
-
-
-</script>

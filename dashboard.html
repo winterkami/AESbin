@@ -14,6 +14,7 @@
 
 
     <body>
+        <script src="common.js"></script>
         <header class="navbar">
             <div class="logo">
                 <img src="./logo.PNG" />
@@ -153,25 +154,3 @@
         </html>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const logoutButton = document.getElementById("logout-button");
-
-        logoutButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            if (confirm("Are you sure you want to log out?")) {
-                fetch("logout.php", { cache: "no-store" })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.loggedOut) {
-                            alert("You have been logged out.");
-                            window.location.href = "dashboard.html";
-                        } else {
-                            alert("Logout failed. Please try again.");
-                        }
-                    })
-                    .catch((error) => console.error("Error during logout:", error));
-            }
-        });
-    });
-</script>
