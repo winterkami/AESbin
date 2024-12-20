@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./recent_pastes_styles.css">
   <script src="common.js"></script>
   <script>
-    // 检查登录状态，如果未登录，则跳转到登录页面
+
     document.addEventListener("DOMContentLoaded", () => {
       fetch("check_session.php", { cache: "no-store" })
               .then((response) => response.json())
