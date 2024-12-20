@@ -115,6 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
+    <script src="../common.js"></script>
     <header class="navbar">
         <div class="logo">
             <img src="../logo.PNG" />
@@ -124,18 +125,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../recent_pastes_v2.html">Recent</a></li>
-                <li><a href="../login.php">Login</a></li>
+                <li><a href="../login.php" id="login-button">Login</a></li>
                 <li><a href="../dashboard.html">Dashboard</a></li>
-
-
                 <li>
-                    <button id="logout-button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: black; font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;">
-                        Logout
-                    </button>
+                    <a href="../logout.php" id="logout-button" style="cursor: pointer; font-weight: bold;">Logout</a>
                 </li>
             </ul>
-
         </nav>
         <!--css animation for falling lettesr: a, e, s, b, i , n-->
 
