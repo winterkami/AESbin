@@ -1,4 +1,5 @@
 <?php
+// Chenxuan Jin 261074669
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get form data
     $email = htmlspecialchars(trim($_POST['email']));

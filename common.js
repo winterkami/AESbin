@@ -1,3 +1,4 @@
+// Chenxuan Jin 261074669
 document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("login-button");
     const logoutButton = document.getElementById("logout-button");

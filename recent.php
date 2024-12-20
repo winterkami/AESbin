@@ -1,5 +1,5 @@
 <?php
-// Enlai Li 261068637
+// Enlai Li 261068637 Chenxuan Jin 261074669
 
 // make sure database exists
 require_once "database_create.php";
