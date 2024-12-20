@@ -84,7 +84,6 @@ git clone https://github.com/eli0009/COMP307-project.git
 #### Backend, Frontend & Database: User-Specific Recent Content Viewing
 - **PHP backend (`recent.php`)** retrieves user-specific data from the database using the `user_id` stored in the session, ensuring that only logged-in users can view their past entries.
 - Dynamic fetching of recent user submissions, sorted by submission date, and limited by pagination for efficient display.
-- **Frontend** dynamically updates the table in `recent_pastes_v2.html` using **JavaScript (`recent_script.js`)**, with options for searching, sorting (Recent, Popular, Oldest), and pagination.
 - The **frontend verifies the user's login status** via a `checkLoginStatus` function in `common.js`, redirecting unauthorized users to the login page.
 - The table content dynamically displays the entries with fields such as date submitted, content preview, unique ID, and visit count.
 
