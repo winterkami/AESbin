@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Retrieve form data
-    $login = htmlspecialchars(trim($_POST['login'])); // Username or email
+    $email = htmlspecialchars(trim($_POST['email'])); // email
     $password = htmlspecialchars(trim($_POST['password'])); // User's input password
 
     // Database configuration
@@ -21,33 +21,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $conn->query("
         CREATE TABLE IF NOT EXISTS user_account (
             number INT NOT NULL AUTO_INCREMENT,
-            id VARCHAR(255) NOT NULL UNIQUE,
-            content TEXT NOT NULL,
-            password BOOLEAN NOT NULL,
+            id VARCHAR(255) NOT NULL UNIQUE,  -- email
+            content TEXT NOT NULL,           -- hashed password
+            password BOOLEAN NOT NULL,       -- indicates if it's hashed
             PRIMARY KEY (number)
         );
         ");
 
-        // Query to check if username or email exists
-        $sql = "SELECT * FROM user_account WHERE (id = ? OR content = ?)";
+        // Query to check if email exists
+        $sql = "SELECT * FROM user_account WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $login, $login); // Bind username/email to the query
+        $stmt->bind_param("s", $email); // Bind email to the query
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             // Verify the password
-            if (password_verify($password, $user['content'])) { // Assuming `content` stores the hashed password
+            if (password_verify($password, $user['content'])) {
                 session_start();
-                $_SESSION['user_id'] = $user['number']; // Store user's primary ID
-                $_SESSION['username'] = $user['id'];    // Store username
+                $_SESSION['user_id'] = $user['number']; // Store user's primary key
+                $_SESSION['email'] = $user['id'];       // Store email
                 echo "<script>alert('Login successful!'); window.location.href='index.html';</script>";
             } else {
                 echo "<script>alert('Invalid password. Please try again.');</script>";
             }
         } else {
-            echo "<script>alert('No user found with that username or email.');</script>";
+            echo "<script>alert('No user found with that email.');</script>";
         }
 
         // Close statement and connection
@@ -60,11 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             text-align: center;
         }
 
-        input[type="text"],
+        input[type="email"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
@@ -135,20 +135,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .register a:hover {
             text-decoration: underline;
         }
-
-        .error {
-            color: red;
-            font-size: 0.9rem;
-        }
     </style>
 </head>
 
 <body>
     <form method="POST" action="">
         <h2>Login</h2>
-        <label for="login">Username or Email</label>
-        <span class="hint">Enter your registered username or email address.</span>
-        <input type="text" name="login" id="login" placeholder="Username or Email" required>
+        <label for="email">Email</label>
+        <span class="hint">Enter your registered email address.</span>
+        <input type="email" name="email" id="email" placeholder="Email" required>
 
         <label for="password">Password</label>
         <span class="hint">Enter your password (case-sensitive).</span>
@@ -161,5 +156,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </form>
 </body>
-
 </html>

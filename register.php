@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get form data
-    $username = htmlspecialchars(trim($_POST['username']));
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
     $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
@@ -10,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($password !== $confirm_password) {
         echo "<script>alert('Passwords do not match! Please try again.');</script>";
     } else {
-        // Validate password strength (at least 8 characters, with letters, numbers, and special characters)
+        // Validate password strength
         if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $password)) {
             echo "<script>alert('Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.');</script>";
         } else {
@@ -18,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Connect to database
-            $conn = new mysqli("localhost", "root", "", "db"); // Database name is `db`
+            $conn = new mysqli("localhost", "root", "", "db");
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
@@ -27,17 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $conn->query("
             CREATE TABLE IF NOT EXISTS user_account (
                 number INT NOT NULL AUTO_INCREMENT,
-                id VARCHAR(255) NOT NULL UNIQUE, -- Username or email
-                content TEXT NOT NULL,          -- Encrypted password
-                password BOOLEAN NOT NULL,      -- Indicates if encrypted
+                id VARCHAR(255) NOT NULL UNIQUE, -- email
+                content TEXT NOT NULL,          -- hashed password
+                password BOOLEAN NOT NULL,      -- indicates if encrypted
                 PRIMARY KEY (number)
             );
             ");
 
-            // Check if username or email already exists
+            // Check if email already exists
             $sql_check = "SELECT * FROM user_account WHERE id = ?";
             $stmt_check = $conn->prepare($sql_check);
-            $stmt_check->bind_param("s", $email); // Assuming email is unique
+            $stmt_check->bind_param("s", $email);
             $stmt_check->execute();
             $result_check = $stmt_check->get_result();
 
@@ -46,10 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt_check->close();
             } else {
                 $stmt_check->close();
-                // Insert user data into `user_account` table
+                // Insert user data
                 $sql = "INSERT INTO user_account (id, content, password) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $is_password_encrypted = true; // Indicates if encrypted
+                $is_password_encrypted = true;
                 $stmt->bind_param("ssi", $email, $hashed_password, $is_password_encrypted);
 
                 if ($stmt->execute()) {
@@ -68,11 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             text-align: center;
         }
 
-        input[type="text"],
         input[type="email"],
         input[type="password"] {
             width: 100%;
@@ -129,11 +127,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-bottom: 5px;
         }
 
-        .tooltip {
-            font-size: 0.8rem;
-            color: #666;
-            cursor: help;
-            border-bottom: 1px dashed #666;
+        .hint ul {
+            margin: 0;
+            padding-left: 15px;
         }
     </style>
 </head>
@@ -141,9 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <form method="POST" action="">
         <h2>Register</h2>
-        <label for="username">Username</label>
-        <span class="hint">Choose a unique username (3-20 characters).</span>
-        <input type="text" name="username" id="username" placeholder="Enter username" required>
 
         <label for="email">Email</label>
         <span class="hint">Enter a valid email address (e.g., example@example.com).</span>
@@ -169,5 +162,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="submit">Register</button>
     </form>
 </body>
-
 </html>
