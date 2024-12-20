@@ -1,15 +1,28 @@
 <!-- aaron elcheson: 261047851 -> RECENT PASTES PAGE: responsive layout for recent pastes, displayed in a table and populated from the database-->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aesbin Recent Pastes</title>
-    <link rel="stylesheet" href="./animation.css" />
-    <link rel="stylesheet" href="./recent_pastes_styles.css" />
-    <!-- included a recent paste page specific css sheet-->
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aesbin Recent Pastes</title>
+  <link rel="stylesheet" href="./animation.css">
+  <link rel="stylesheet" href="./recent_pastes_styles.css">
+  <script src="common.js"></script>
+  <script>
+    // 检查登录状态，如果未登录，则跳转到登录页面
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("check_session.php", { cache: "no-store" })
+              .then((response) => response.json())
+              .then((data) => {
+                if (!data.loggedIn) {
+                  alert("You need to log in to access this page.");
+                  window.location.href = "login.php";
+                }
+              })
+              .catch((error) => console.error("Error checking session:", error));
+    });
+  </script>
+</head>
 
   <body>
     <script src="common.js"></script>

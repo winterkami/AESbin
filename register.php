@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get form data
-    $username = htmlspecialchars(trim($_POST['username']));
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
     $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
@@ -27,14 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $conn->query("
             CREATE TABLE IF NOT EXISTS user_account (
                 number INT NOT NULL AUTO_INCREMENT,
-                id VARCHAR(255) NOT NULL UNIQUE, -- Username or email
+                id VARCHAR(255) NOT NULL UNIQUE, -- Email
                 content TEXT NOT NULL,          -- Encrypted password
                 password BOOLEAN NOT NULL,      -- Indicates if encrypted
                 PRIMARY KEY (number)
             );
             ");
 
-            // Check if username or email already exists
+            // Check if email already exists
             $sql_check = "SELECT * FROM user_account WHERE id = ?";
             $stmt_check = $conn->prepare($sql_check);
             $stmt_check->bind_param("s", $email); // Assuming email is unique
@@ -98,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             text-align: center;
         }
 
-        input[type="text"],
         input[type="email"],
         input[type="password"] {
             width: 100%;
@@ -128,22 +126,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             color: #666;
             margin-bottom: 5px;
         }
-
-        .tooltip {
-            font-size: 0.8rem;
-            color: #666;
-            cursor: help;
-            border-bottom: 1px dashed #666;
-        }
     </style>
 </head>
 
 <body>
     <form method="POST" action="">
         <h2>Register</h2>
-        <label for="username">Username</label>
-        <span class="hint">Choose a unique username (3-20 characters).</span>
-        <input type="text" name="username" id="username" placeholder="Enter username" required>
 
         <label for="email">Email</label>
         <span class="hint">Enter a valid email address (e.g., example@example.com).</span>
