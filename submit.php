@@ -1,6 +1,5 @@
 <?php
 // Enlai Li 261068637
-session_start();
 
 function encrypt($string, $password)
 {
@@ -43,23 +42,18 @@ try {
         );
     ");
 
-    // get inputs
+    // get inputs 
     $content = $_POST['content'];
     $password = $_POST['password'];
-    // encrypt content if password is provided
+    // encrypt content with aes if password is provided
     if ($password) {
         $content_db = encrypt($content, $password);
         $password_db = true;
-    } else {
+    }
+    // content stays plaintext if no password
+    else {
         $content_db = $content;
         $password_db = false;
-    }
-
-
-    if (isset($_SESSION['user_id'])) {
-        $user_id = $_SESSION['user_id'];
-
-        $content_db = "USER:" . $user_id . ";" . $content_db;
     }
 
     // generate unique id that doesn't exist in the db
@@ -67,19 +61,17 @@ try {
     do {
         $id = bin2hex(random_bytes(6));
         $result = $mysqli->execute_query(
-            "SELECT COUNT(*) as count FROM user_content
+            "SELECT COUNT(*) as count FROM user_content 
             WHERE id = ?",
             [$id]
         );
         $count = $result->fetch_assoc()["count"];
     } while ($count > 0);
-
     // insert content
     $mysqli->execute_query(
         "INSERT INTO user_content (id, content, password) VALUES (?, ?, ?)",
         [$id, $content_db, $password_db]
     );
-
     // redirect to unique page
     header("Location: pastes/$id");
     exit();
