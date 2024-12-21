@@ -1,18 +1,17 @@
 <!-- aaron elcheson: 261047851 -> RECENT PASTES PAGE: responsive layout for recent pastes, displayed in a table and populated from the database-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aesbin Recent Pastes</title>
-  <link rel="stylesheet" href="./animation.css">
-  <link rel="stylesheet" href="./recent_pastes_styles.css">
-  <script src="common.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aesbin Recent Pastes</title>
+    <link rel="stylesheet" href="./animation.css" />
+    <link rel="stylesheet" href="./recent_pastes_styles.css" />
+    <script src="common.js"></script>
+  </head>
 
   <body>
-
-  <header class="navbar">
+    <header class="navbar">
       <div class="logo">
         <img src="./logo.PNG" alt="Logo" />
       </div>
@@ -21,18 +20,21 @@
           <li><a href="./index.html">Home</a></li>
           <li><a href="./about.html">About</a></li>
           <li><a href="./recent_pastes_v2.html">Recent</a></li>
-          <li><a href="./dashboard.html">Dashboard</a></li>
           <li><a href="./login.php" id="login-button">Login</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
           <li>
-            <a href="./logout.php" id="logout-button" style="cursor: pointer; font-weight: bold;">Logout</a>
+            <a
+              href="./logout.php"
+              id="logout-button"
+              style="cursor: pointer; font-weight: bold"
+              >Logout</a
+            >
           </li>
         </ul>
       </nav>
     </header>
 
-
-
-  <!-- ############################################### MAIN TABLE AND BODY CONTENT BEGIN ####################################################-->
+    <!-- ############################################### MAIN TABLE AND BODY CONTENT BEGIN ####################################################-->
 
     <main class="main-content">
       <div class="paste-search-area">
@@ -91,8 +93,12 @@
       </div>
     </main>
 
-    <footer class="footer" style="font-family: 'Courier New', Courier, monospace; font-weight: bold;"> AESbin 2024</footer>
+    <footer
+      class="footer"
+      style="font-family: 'Courier New', Courier, monospace; font-weight: bold"
+    >
+      AESbin 2024
+    </footer>
     <script src="recent_script.js"></script>
   </body>
 </html>
-

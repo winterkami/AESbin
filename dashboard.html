@@ -3,128 +3,152 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aesbin User Dashboard</title>
     <link rel="stylesheet" href="./animation.css" />
-    <link rel="stylesheet" href="./general_styles.css">
+    <link rel="stylesheet" href="./general_styles.css" />
     <script>
-        // Ensure only logged-in users can access the dashboard
-        // Chenxuan Jin 261074669
-        document.addEventListener("DOMContentLoaded", () => {
-            fetch("check_session.php", { cache: "no-store" })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (!data.loggedIn) {
-                        alert("You need to log in to access the dashboard.");
-                        window.location.href = "login.php";
-                    }
-                })
-                .catch((error) => console.error("Error checking session:", error));
-        });
+      // Ensure only logged-in users can access the dashboard
+      // Chenxuan Jin 261074669
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("check_session.php", { cache: "no-store" })
+          .then((response) => response.json())
+          .then((data) => {
+            if (!data.loggedIn) {
+              alert("You need to log in to access the dashboard.");
+              window.location.href = "login.php";
+            }
+          })
+          .catch((error) => console.error("Error checking session:", error));
+      });
     </script>
-</head>
+  </head>
 
-<body>
-<script src="common.js"></script>
-<header class="navbar">
-    <div class="logo">
+  <body>
+    <script src="common.js"></script>
+    <header class="navbar">
+      <div class="logo">
         <img src="./logo.PNG" alt="Logo" />
-    </div>
-    <nav>
+      </div>
+      <nav>
         <ul class="nav-links">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./recent_pastes_v2.html">Recent</a></li>
-            <li><a href="./logout.php" id="logout-button">Logout</a></li>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./recent_pastes_v2.html">Recent</a></li>
+          <li><a href="./login.php" id="login-button">Login</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li>
+            <a
+              href="./logout.php"
+              id="logout-button"
+              style="cursor: pointer; font-weight: bold"
+              >Logout</a
+            >
+          </li>
         </ul>
-    </nav>
-    <div class="falling-letters">
+      </nav>
+      <div class="falling-letters">
         <span class="letter">A</span>
         <span class="letter">E</span>
         <span class="letter">S</span>
         <span class="letter">b</span>
         <span class="letter">i</span>
         <span class="letter">n</span>
+      </div>
+    </header>
+
+    <div class="picture-box">
+      <img
+        class="picture-box"
+        src="./nebula.jpg"
+        alt="Image of the Horsehead Nebula"
+      />
     </div>
-</header>
 
-<div class="picture-box">
-    <img class="picture-box" src="./nebula.jpg" alt="Image of the Horsehead Nebula">
-</div>
-
-<!--had a lot of trouble with these flex containers. I'm sorry I really tried. I know this is not working like the recent pastes page--><div class="dashboard-box">
-    <aside class="sidebar">
+    <!--had a lot of trouble with these flex containers. I'm sorry I really tried. I know this is not working like the recent pastes page-->
+    <div class="dashboard-box">
+      <aside class="sidebar">
         <p>User Name</p>
         <p>Date Registered</p>
         <p>Number of Posts</p>
 
         <!-- Begin WeatherLink Fragment -->
         <aside class="weather">
-            <iframe title="Environment Canada Weather" width="296" height="191" src="https://weather.gc.ca/wxlink/wxlink.html?coords=45.529%2C-73.562&lang=e" allowtransparency="true" style="border: 0;"></iframe>
+          <iframe
+            title="Environment Canada Weather"
+            width="296"
+            height="191"
+            src="https://weather.gc.ca/wxlink/wxlink.html?coords=45.529%2C-73.562&lang=e"
+            allowtransparency="true"
+            style="border: 0"
+          ></iframe>
         </aside>
         <!-- End WeatherLink Fragment -->
-    </aside>
+      </aside>
 
-    <main class="main-content">
+      <main class="main-content">
         <div class="paste-search-area">
-            <div class="paste-search-buttons">
-                <button class="paste-button active">Recent</button>
-                <button class="paste-button">Popular</button>
-                <button class="paste-button">Oldest</button>
-            </div>
+          <div class="paste-search-buttons">
+            <button class="paste-button active">Recent</button>
+            <button class="paste-button">Popular</button>
+            <button class="paste-button">Oldest</button>
+          </div>
 
-            <div class="paste-search-bar">
-                <input type="text" placeholder="Paste search..." />
-                <button>Search</button>
-            </div>
+          <div class="paste-search-bar">
+            <input type="text" placeholder="Paste search..." />
+            <button>Search</button>
+          </div>
         </div>
 
-        <div class="table-container"style="padding: 1rem; margin: auto; ">
-            <table>
-                <thead>
-                <tr>
-                    <th>Posted date</th>
-                    <th>Id</th>
-                    <th>Content</th>
-                    <th>Visits</th>
-                </tr>
-                </thead>
+        <div class="table-container" style="padding: 1rem; margin: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Posted date</th>
+                <th>Id</th>
+                <th>Content</th>
+                <th>Visits</th>
+              </tr>
+            </thead>
 
-                <tbody>
-                <tr>
-                    <td>2024-12-15</td>
-                    <td>1</td>
-                    <td>Sample Content</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>2024-12-13</td>
-                    <td>2</td>
-                    <td>Sample Content</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2024-12-12</td>
-                    <td>3</td>
-                    <td>Sample Content</td>
-                    <td>1</td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="page-buttons" style="padding: 1.5rem;">
-                <button id="prevPage" class="page-button" disabled>Previous</button>
-                <span id="pageNumber">Page 1</span>
-                <button id="nextPage" class="page-button">Next</button>
-            </div>
+            <tbody>
+              <tr>
+                <td>2024-12-15</td>
+                <td>1</td>
+                <td>Sample Content</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>2024-12-13</td>
+                <td>2</td>
+                <td>Sample Content</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>2024-12-12</td>
+                <td>3</td>
+                <td>Sample Content</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="page-buttons" style="padding: 1.5rem">
+            <button id="prevPage" class="page-button" disabled>Previous</button>
+            <span id="pageNumber">Page 1</span>
+            <button id="nextPage" class="page-button">Next</button>
+          </div>
         </div>
-    </main>
-</div>
+      </main>
+    </div>
 
-<footer class="footer" style="font-family: 'Courier New', Courier, monospace;"> AESbin 2024</footer>
-<script src="recent_script.js"></script>
-</body>
-
+    <footer
+      class="footer"
+      style="font-family: 'Courier New', Courier, monospace"
+    >
+      AESbin 2024
+    </footer>
+    <script src="recent_script.js"></script>
+  </body>
 </html>
