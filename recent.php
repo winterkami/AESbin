@@ -1,7 +1,7 @@
 <?php
-// Enlai Li 261068637
-session_start();
+// Enlai Li 261068637 Chenxuan Jin 261074669
 
+// make sure database exists
 require_once "database_create.php";
 
 // db info
@@ -9,7 +9,6 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "db";
-
 // check if the request is correct
 if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET['sort']) || !isset($_GET['page'])) {
     http_response_code(400); // Bad Request
@@ -23,13 +22,18 @@ try {
     }
     $mysqli->select_db($dbname);
 
+    // // Debug
+    // $sort = "recent";
+    // $page = 2;
+
     // get sorting method
     $sort = $_GET['sort'] ?? "recent";
-    // get current page
+    // get current page 
     $page = intval($_GET['page']) ?? 1;
     // get search
     $search = $_GET['search'] ?? "";
 
+    // determine sorting method
     switch ($sort) {
         case 'popular':
             $order_by = "visits DESC, number DESC";
@@ -43,44 +47,19 @@ try {
             break;
     }
 
+    // determine from where to start 
     $items_per_page = 10;
     $start_from = ($page - 1) * $items_per_page;
 
-    $items_per_page_plus_one = $items_per_page + 1;
-
-    $search_pattern = "%" . $search . "%";
-
-    $is_logged_in = isset($_SESSION['user_id']);
-
-    if ($is_logged_in) {
-
-        $user_id = $_SESSION['user_id'];
-        $query = "
-            SELECT date, id, content, visits
-            FROM user_content
-            WHERE content LIKE CONCAT('USER:', ?, ';%')
-            AND content LIKE ?
-            ORDER BY $order_by
-            LIMIT ? OFFSET ?
-        ";
-        $stmt = $mysqli->prepare($query);
-        $stmt->bind_param("ssii", $user_id, $search_pattern, $items_per_page_plus_one, $start_from);
-    } else {
-
-        $query = "
-            SELECT date, id, content, visits
-            FROM user_content
-            WHERE content NOT LIKE 'USER:%;%'
-            AND content LIKE ?
-            ORDER BY $order_by
-            LIMIT ? OFFSET ?
-        ";
-        $stmt = $mysqli->prepare($query);
-        $stmt->bind_param("sii", $search_pattern, $items_per_page_plus_one, $start_from);
-    }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // get submissions in a particular order
+    $result = $mysqli->execute_query(
+        "SELECT date, id, content, visits 
+        FROM user_content
+        WHERE content LIKE ?
+        ORDER BY $order_by 
+        LIMIT ? OFFSET ?",
+        ["%" . $search . "%", $items_per_page + 1, $start_from]
+    );
     $rows = $result->fetch_all();
 
     // check if next page exists
