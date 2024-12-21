@@ -76,14 +76,14 @@ git clone https://github.com/eli0009/COMP307-project.git
 - **Registration form (`register.php`)** validates input fields, hashes passwords with a secure algorithm (e.g., bcrypt), and stores user details.
 - **Login form (`login.php`)** validates user credentials by comparing the hashed password from the database with the provided input.
 - A **PHP session** is initiated upon successful login, storing the user's session data (e.g., `user_id`).
-- Secure handling of session state ensures unauthorized users cannot access restricted pages like the `Recent` page.
+- Secure handling of session state ensures unauthorized users cannot access restricted pages like the `Dashboard` page.
 - Includes **`check_session.php` endpoint** to validate the login status of users across different pages.
 
 ---
 
-#### Backend, Frontend & Database: User-Specific Recent Content Viewing
-- **PHP backend (`recent.php`)** retrieves user-specific data from the database using the `user_id` stored in the session, ensuring that only logged-in users can view their past entries.
-- Dynamic fetching of recent user submissions, sorted by submission date, and limited by pagination for efficient display.
+#### Backend, Frontend & Database: User-Specific Dashboard Content Viewing
+- **PHP backend (`dashboard.html`)** retrieves user-specific data from the database using the `user_id` stored in the session, ensuring that only logged-in users can view their past entries.
+- Dynamic fetching of user-specific submissions, sorted by submission date, and limited by pagination for efficient display.
 - The **frontend verifies the user's login status** via a `checkLoginStatus` function in `common.js`, redirecting unauthorized users to the login page.
 - The table content dynamically displays the entries with fields such as date submitted, content preview, unique ID, and visit count.
 
@@ -93,12 +93,11 @@ git clone https://github.com/eli0009/COMP307-project.git
 - `register.php`: Handles user registration by securely storing user details.
 - `login.php`: Authenticates users and initializes sessions upon successful login.
 - `check_session.php`: Verifies the login status of a user.
-- `recent.php`: Fetches recent entries specific to the logged-in user from the database.
-- `recent_script.js`: Implements dynamic table updates, sorting, searching, and pagination.
+- `dashboard.html`: Fetches user-specific entries from the database.
 - `common.js`: Handles shared functionalities like login state verification and event listeners.
-- `database_create.php`: Initializes the database schema for user authentication and content storage.
 - `register.html`: User registration form connected to `register.php`.
-- `recent_pastes_v2.html`: Displays user-specific recent entries with dynamic interaction powered by `recent.php` and `recent_script.js`.
+- `dashboard.html`: Displays user-specific entries with dynamic interaction powered by `dashboard.php` and `dashboard_script.js`.
+
 
 
 
