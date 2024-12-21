@@ -9,8 +9,10 @@ This is the about page for the website with instructions for use and community p
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aesbin About</title>
     <link rel="stylesheet" href="./animation.css" />
-    <link rel="stylesheet" href="./general_styles.css" />
-    <!-- included a recent paste page specific css sheet-->
+    <link rel="stylesheet" href="./recent_pastes_styles.css" />
+ 
+
+    
   </head>
 
   <body>
@@ -45,9 +47,10 @@ This is the about page for the website with instructions for use and community p
     
     <!-- FLEX BOX INLINE STYLES FOR CUSTOM ABOUT PAGE SECTION : Information box, decorative sidebars and iframe -->
 
-    <div style="display: flex; flex-direction: column; margin: 1rem; height: 68vh; border-radius: 0.2rem; gap: 1rem; ">
+    <div style="display: flex; flex-direction: column; margin: 1rem; padding: 5rem; ; border-radius: 0.2rem; gap: 1rem; height: auto; width: auto;">
         
-        <div style="display: flex; flex: 1; gap: 1rem;">
+        <div style="display: flex; flex: 1; gap: 1rem;">  <!-- I tried to use in line styles for the flex elements because I thought that would be easier
+          than trying to reuse or add to my style sheets. It did not work out as well as I had hoped. I really tried to fit the image of the moon to the container but had trouble -->
 
             <div style="flex: 3; padding: 0.5rem; background-color:#c3caca; border-radius: 0.2rem; border-style: solid; border-color: #363F40; gap: 1rem;">
                 
@@ -67,7 +70,7 @@ This is the about page for the website with instructions for use and community p
             </div>
 
             <div style="flex: 1; padding: 0.5rem; background-color: #363F40; border-radius: 0.2rem; border-style: solid; border-color:#363F40; gap: 1rem; display: inline-block;">
-                <img class="picture-box" style="width: 65%; height: 65%; object-fit: cover; align-items: center; c:\Users\Aaron\Downloads\stars.jpgdisplay: inline-block;"  src="./moon.jpg">
+                <img class="picture-box" style="width: 65%; height: 65%; object-fit: cover; align-items: center; display: inline-block;"  src="./moon.jpg">
             </div>
         </div>
     
@@ -78,14 +81,16 @@ This is the about page for the website with instructions for use and community p
                 
                 <img class="picture-box" style="width: 100%; height: 90%; object-fit: cover; margin: auto;" src="./stars.jpg">
             </div>
-            <div style="flex: 1; padding: 0.5rem; margin:0.2rem; background-color:  #363F40; justify-content: center; align-items: center; border-radius: 0.2rem; border-style: solid; border-color: #363F40; ">
-                <!-- <iframe src="https://www.youtube.com/" style="width: 100%; height: 100%; border: none; "></iframe> -->
+            <div style="flex: 2; padding: 0.5rem; margin:0.2rem; background-color:  #363F40; justify-content: center; align-items: center; border-radius: 0.2rem; border-style: solid; border-color: #363F40; ">
+                
                 <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jfKfPfyJRdk" title="lofi hip hop radio 📚 beats to relax/study to" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
                 gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
+
+           
         </div>
-    
         <footer class="footer" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; border-radius: 0.5rem; gap:1rem; margin-bottom: auto;"> AESbin 2024</footer>
+       
         
     </div>
 

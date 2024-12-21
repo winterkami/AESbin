@@ -1,5 +1,6 @@
 <!--Aaron Elcheson: 261047851-->
-<!-- dashboard -> private dashboard for users who are logged in-->
+<!-- dashboard -> private dashboard for users who are logged in
+ -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,8 @@
     <link rel="stylesheet" href="./animation.css" />
     <link rel="stylesheet" href="./general_styles.css">
 </head>
+
+
 
 
     <body>
@@ -45,7 +48,7 @@
 
         </div>
 
-        
+            <!--had a lot of trouble with these flex containers. I'm sorry I really tried. I know this is not working like the recent pastes page-->
 
         <div class="dashboard-box">
 
@@ -66,25 +69,30 @@
          
             
             <main class="main-content">
+
               <div class="paste-search-area">
+
                 <div class="paste-search-buttons">
                   <button class="paste-button active">Recent</button>
                   <!-- buttons for populating the table with pastes - recent, popular, or random  (can remove any as needed)-->
                   <button class="paste-button">Popular</button>
                   <button class="paste-button">Oldest</button>
                 </div>
+                
         
                 <div class="paste-search-bar">
                   <input type="text" placeholder="Paste search..." />
                   <!-- user can search for a paste here -->
                   <button>Search</button>
                 </div>
+
               </div>
         
-              <div class="table-container">
-                <table>
-                  <thead>
-                    <tr>
+              <div class="table-container" style="padding: 1rem; margin: auto; ">
+                
+                <table >
+                  <thead >
+                    <tr >
                       <th>Posted date</th>
                       <th>Id</th>
                       <th>Content</th>
@@ -92,7 +100,7 @@
                     </tr>
                   </thead>
         
-                  <tbody>
+                  <tbody >
                     <tr>
                       <td>2024-12-15</td>
                       <td>1</td>
@@ -113,14 +121,16 @@
                     </tr>
                   </tbody>
 
+
                   
                  
                 </table>
-                <div class="page-buttons" style="padding: 1.5rem;">
+                <div class="page-buttons" style="padding: 1.5rem; ">
                   <button id="prevPage" class="page-button" disabled>Previous</button>
                   <span id="pageNumber">Page 1</span>
                   <button id="nextPage" class="page-button">Next</button>
                 </div>
+                
               
 
 <!-- 
