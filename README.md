@@ -1,4 +1,4 @@
-# COMP307-project
+# AESbin
 ## URLS
 Code repository: https://github.com/eli0009/COMP307-project
 ## Project setup
