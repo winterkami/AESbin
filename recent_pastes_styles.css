@@ -8,7 +8,7 @@ recent pastes page css -> mostly styling for the responsive elements in the tabl
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    
     font-family: 'Courier New', Courier, monospace, sans-serif; /* font family */
 }
 
@@ -112,6 +112,8 @@ body {
 
 }
 
+/* SEARCH AREA STYLES: ONE OF THE ONLY DIFFERENCES IN THIS STYLE SHEET FROM THE RECENT PASTES CSS SHEET */
+
 .paste-search-area {
 
     display: flex;
@@ -157,7 +159,7 @@ body {
 
 }
 
-.paste-button:hover { /* styles for buttons on hover  */
+.paste-button:hover { /* styles for buttons on hover - just slightly different from chosen brand colours to stand out in table  */
 
     background-color: rgb(243, 178, 189);
     color: black;
@@ -260,13 +262,11 @@ cursor: not-allowed;
 
 .table-container {
 
-/* TRYINGTO add scrollbar for table when screen is mobile */
 width: 100%;
 max-width: 90rem;
 height: 400px; 
 
-/* overflow-y: auto; 
-overflow-x: auto; */
+
 border-radius: 0.3rem;
 
 padding: 1rem;
@@ -299,6 +299,11 @@ padding: 0.5rem;
 
 /* ******************************************************************* RESPONSIVE MEDIA QUERIES BELOW ************************************************************** */
 
+/* trying to fix things between the style sheets. I really should have just kept things to 1 sheet. Sorry for the confusion. I wanted one to just be for the header and footer
+and then I kept adding things to both and ended up having trouble with flexbox */
+
+/* things should be looking better now for the recent table pastes */
+
 @media (max-width: 780px) {
 
 .paste-search-area {
@@ -317,7 +322,7 @@ flex-direction: column;
 
 .paste-button { /* paste buttons should resize */
 
-font-size: 0.7rem;
+font-size: 1rem;
 
 padding: 0.4rem 0.6rem;
 
@@ -326,7 +331,7 @@ padding: 0.4rem 0.6rem;
 .paste-search-bar input,
 .paste-search-bar button {
 
-font-size: 0.7rem;
+font-size: 1rem;
 padding: 0.4rem;
 
 
@@ -335,15 +340,36 @@ padding: 0.4rem;
 
 .table-container { /* table should resize on smaller screens */
 
-height: 300px; 
+display: flex;
+flex: 1; 
+gap: 1rem;
+
+
+}
+
+.table{
+
+
+    display: flex;
+    flex: 1; 
+    padding: 1rem;
+    gap: 1rem;
 
 }
 
 th, td {
 
-font-size: 0.7rem;
 
-padding: 0.4rem;
+    display: flex;
+    flex: 1; 
+
+font-size: 1rem; 
+text-align: center;
+
+word-wrap: break-word;
+
+padding: 0.5rem;
+
 
 }
 
@@ -352,7 +378,7 @@ padding: 0.4rem;
 th { /* BRAND COLORS */
 
     font-weight: bold;
-
+   
     background-color: #BFB8BD;
     color: black;
 
