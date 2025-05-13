@@ -1,6 +1,4 @@
 # AESbin
-## URLS
-Code repository: https://github.com/eli0009/COMP307-project
 ## Project setup
 1. Install XAMPP version 8.2.12 / PHP 8.2.12: https://www.apachefriends.org/download.html
 2. Navigate to `C:\xampp\htdocs\` or wherever you installed XAMPP's `htdocs` and unzip the project zip file. Or run the following inside `htdocs`:
